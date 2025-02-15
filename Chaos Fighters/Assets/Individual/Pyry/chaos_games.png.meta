@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 612bd3e579b6d8b44ba810bda0f86fba
+guid: df40a39960c9c024abf9248a7befc4bd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4702544020559098553
-    second: fox_0
+      213: 6319774034194825540
+    second: chaos_games_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fox_0
+      name: chaos_games_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 562
-        height: 597
+        width: 512
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 74d00f1e0253dbeb0800000000000000
-      internalID: -4702544020559098553
+      spriteID: 4418be0200954b750800000000000000
+      internalID: 6319774034194825540
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fox_0: -4702544020559098553
+      chaos_games_0: 6319774034194825540
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
