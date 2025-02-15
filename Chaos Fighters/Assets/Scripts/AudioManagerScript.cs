@@ -7,66 +7,66 @@ using UnityEngine;
 public class AudioManagerScript : MonoBehaviour
 {
     public static AudioManagerScript instance;
+    /*
 
-    public Sound[] musicSounds, sfxSounds;
+    public Sound[] musicSounds, sounds;
     public AudioSource musicSource, sfxSource;
+    */
 
+    public Sound[] sounds;
+
+    public float soundVolume = 1;
+    public float musicMultiplier = 1;
 
     void Awake()
     {
+ 
         if (instance == null) 
         { 
             instance = this; 
         }
         else 
         { 
-            Destroy(gameObject); 
+            Destroy(gameObject);
+            return;
         }
+
+        //DontDestroyOnLoad(gameObject);
+        
+        foreach (Sound s in sounds)
+        {
+
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+        } 
     }
 
-    void Start()
+    public void PlaySound(string name)
     {
-        PlayMusic("MainMenuMusic");
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.volume = soundVolume;
+        s.source.Play();
     }
 
     public void PlayMusic(string name)
     {
-        Sound s = Array.Find(musicSounds, x => x.name == name);
-
-        if (s == null)
-        {
-            Debug.Log("Music not found: " + name);
-        }
-        else
-        {
-            musicSource.clip = s.clip;
-            musicSource.Play();
-        }
-
-    }
-    public void PlaySound(string name)
-    {
-        Sound s = Array.Find(sfxSounds, x => x.name == name);
-
-        if (s == null)
-        {
-            Debug.Log("Sound not found: " + name);
-        }
-        else
-        {
-            sfxSource.clip = s.clip;
-            sfxSource.Play();
-        }
-
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.Play();
     }
 
     public void MusicVolume(float volume)
     {
-        musicSource.volume = volume;
+        string name = "MenuMusic";
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.volume = volume;
     }
 
     public void SoundVolume(float volume)
     {
-        sfxSource.volume = volume;
+        soundVolume = volume;
     }
+    
 }

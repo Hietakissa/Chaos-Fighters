@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tiikeri_walk_0: -7505732553252709371
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
