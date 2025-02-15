@@ -9,6 +9,7 @@ public class MainMenuScript : MonoBehaviour
 
     void Start()
     {
+        AudioManagerScript.instance.PlaySound("MenuMusic");
     }
 
     public void PlayButton()
@@ -25,7 +26,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void QuitButton()
     {
-        AudioManagerScript.instance.PlaySound("MenuOk");
+        AudioManagerScript.instance.PlaySound("MenuNegative");
         Application.Quit();
     }
 }
