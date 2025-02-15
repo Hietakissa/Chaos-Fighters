@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      chaos drink_0: -6979220170186181334
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
