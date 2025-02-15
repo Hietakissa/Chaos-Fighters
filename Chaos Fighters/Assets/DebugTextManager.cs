@@ -9,11 +9,14 @@ public class DebugTextManager : MonoBehaviour
 {
     public static DebugTextManager Instance;
 
-    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI player1Text;
+    [SerializeField] TextMeshProUGUI player2Text;
 
     StringBuilder sb = new();
-    Dictionary<string, string> variables = new();
-    bool requireReBake;
+    Dictionary<string, string> player1Variables = new();
+    Dictionary<string, string> player2Variables = new();
+    bool p1RequireReBake;
+    bool p2RequireReBake;
 
     void Awake()
     {
@@ -22,35 +25,66 @@ public class DebugTextManager : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!requireReBake) return;
-
-        sb.Clear();
-        foreach (KeyValuePair<string, string> pair in variables)
+        if (p1RequireReBake)
         {
-            sb.AppendLine($"{pair.Key}: {pair.Value}");
+            sb.Clear();
+            foreach (KeyValuePair<string, string> pair in player1Variables)
+            {
+                sb.AppendLine($"{pair.Key}: {pair.Value}");
+            }
+
+            player1Text.text = sb.ToString();
+            p1RequireReBake = false;
         }
 
-        text.text = sb.ToString();
-        requireReBake = false;
+        if (p2RequireReBake)
+        {
+            sb.Clear();
+            foreach (KeyValuePair<string, string> pair in player2Variables)
+            {
+                sb.AppendLine($"{pair.Key}: {pair.Value}");
+            }
+
+            player2Text.text = sb.ToString();
+            p1RequireReBake = false;
+        }
     }
 
 
-    public void SetVariable(string key, string value)
+    public void SetVariable(string key, string value, PlayerController player = null)
     {
-        variables[key] = value;
-        requireReBake = true;
+        if (!player) player1Variables[key] = value;
+        else if (player.IsPlayer1)
+        {
+            player1Variables["P1" + key] = value;
+            p1RequireReBake = true;
+        }
+        else
+        {
+            player2Variables["P2" + key] = value;
+            p2RequireReBake = true;
+        }
     }
 
-    public void SetVariableFor(string key, string value, float time)
+    public void SetVariableFor(string key, string value, float time, PlayerController player = null)
     {
-        SetVariable(key, value);
+        SetVariable(key, value, player);
         StartCoroutine(RemoveVariableAfter(key, time));
     }
 
-    public void RemoveVariable(string key)
+    public void RemoveVariable(string key, PlayerController player = null)
     {
-        variables.Remove(key);
-        requireReBake = true;
+        if (!player) player1Variables.Remove(key);
+        else if (player.IsPlayer1)
+        {
+            player1Variables.Remove("P1" + key);
+            p1RequireReBake = true;
+        }
+        else
+        {
+            player2Variables.Remove("P2" + key);
+            p2RequireReBake = true;
+        }
     }
 
 

@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     //[Header("Variables")]
     Rigidbody2D rb;
 
-    StateMachineController stateMachineController = new StateMachineController();
+    StateMachineController stateMachine;
     StaminaManager staminaManager = new StaminaManager();
     MovementSettingsSO movement;
     Direction pointingDirection;
@@ -24,19 +24,23 @@ public class PlayerController : MonoBehaviour
     Vector2 inputVector;
     Vector2 acceleration;
     bool isGrounded;
-    bool blocking = true;
 
     public bool IsPlayer1 => player1;
+    public StateMachineController StateMachine => stateMachine;
+    public SpriteRenderer SpriteRenderer => spriteRend;
+    public Vector2 InputVector => inputVector;
+    public Rigidbody2D RB => rb;
 
 
     void Awake()
     {
-        DebugTextManager.Instance.SetVariableFor("Is blocking", blocking.ToString(), 3f);
-
         rb = GetComponent<Rigidbody2D>();
 
         movement = GameManager.Instance.MovementSettings;
         staminaManager.Init();
+
+        stateMachine = new StateMachineController(this);
+        stateMachine.EnterState(PlayerState.Moving);
     }
 
     void Update()
@@ -45,11 +49,20 @@ public class PlayerController : MonoBehaviour
 
         HandleSpriteFlipping();
         HandleInput();
-        //HandleMovement();
-
-        if (!player1) return;
         staminaManager.Update();
-        debugStaminaBar.fillAmount = staminaManager.Stamina / GameManager.Instance.StaminaSettings.MaxStamina;
+        stateMachine.CurrentState.UpdateState();
+
+
+        if (IsPlayer1)
+        {
+
+        }
+        else
+        {
+
+        }
+
+
 
 
         void HandleSpriteFlipping()
@@ -69,38 +82,29 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKey(KeyCode.A)) inputVector.x = -1;
                 if (Input.GetKey(KeyCode.D)) inputVector.x += 1;
 
-                //if (Input.GetKeyDown(KeyCode.W)) velocity.y = movement.JumpForce;
-                if (Input.GetKeyDown(KeyCode.W)) rb.AddForce(Vector2.up * movement.JumpForce, ForceMode2D.Impulse);
+                if (Input.GetKeyDown(KeyCode.W) && isGrounded) rb.AddForce(Vector2.up * movement.JumpForce, ForceMode2D.Impulse);
             }
             else
             {
                 if (Input.GetKey(KeyCode.LeftArrow)) inputVector.x = -1;
                 if (Input.GetKey(KeyCode.RightArrow)) inputVector.x += 1;
 
-                if (Input.GetKeyDown(KeyCode.UpArrow)) rb.AddForce(Vector2.up * movement.JumpForce, ForceMode2D.Impulse);
+                if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded) rb.AddForce(Vector2.up * movement.JumpForce, ForceMode2D.Impulse);
             }
 
-            //if (player1) DebugTextManager.Instance.AddLine($"Input: {inputVector}");
-            //if (player1) DebugTextManager.Instance.AddLine($"Acceleration: {acceleration}");
-
-            if (player1) DebugTextManager.Instance.SetVariable("Input", inputVector.ToString());
-            if (player1) DebugTextManager.Instance.SetVariable("Acceleration", acceleration.ToString());
+            DebugTextManager.Instance.SetVariable($"Input", inputVector.ToString(), this);
+            DebugTextManager.Instance.SetVariable($"Acceleration", acceleration.ToString(), this);
         }
     }
 
     void FixedUpdate()
     {
-        stateMachineController.CurrentState.FixedUpdateState();
+        stateMachine.CurrentState.FixedUpdateState();
     }
 
-    public void HandleMovement()
+    public void HandleMovement(float speedMultiplier = 1f)
     {
-        acceleration = inputVector * movement.MoveSpeed;
-        //acceleration.y += -9.81f * movement.GravityForce * Time.deltaTime; // Gravity
-
-        //velocity.x += velocity.x * -(movement.Drag * movement.Drag) * Time.deltaTime; // Horizontal drag
-
-        //acceleration.x = Mathf.Clamp(acceleration.x, -movement.MaxSpeed, movement.MaxSpeed);
+        acceleration = inputVector * movement.MoveSpeed * speedMultiplier;
         acceleration.y = Mathf.Clamp(acceleration.y, -5f, 10f);
 
 
@@ -117,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (blocking) staminaManager.TakeHit();
+        if (stateMachine.CurrentStateEnum == PlayerState.Blocking) staminaManager.TakeHit();
     }
 }
 
