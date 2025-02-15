@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BlockingState : State
 {
-    protected override PlayerState[] ValidExitStates => new PlayerState[] { PlayerState.Idling, PlayerState.Moving };
+    public override PlayerState[] ValidExitStates => new PlayerState[] { PlayerState.Idling, PlayerState.Moving, PlayerState.Jumping };
 
     public override void UpdateState()
     {

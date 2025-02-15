@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MovingState : State
 {
-    protected override PlayerState[] ValidExitStates => new PlayerState[] { PlayerState.Idling, PlayerState.Blocking, PlayerState.Attacking };
+    public override PlayerState[] ValidExitStates => new PlayerState[] { PlayerState.Idling, PlayerState.Blocking, PlayerState.Attacking, PlayerState.Jumping };
     override protected bool LoopAnimation => true;
 
     public override void UpdateState()

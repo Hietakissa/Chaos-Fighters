@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer SpriteRenderer => spriteRend;
     public Vector2 InputVector => inputVector;
     public Rigidbody2D RB => rb;
+    public bool IsGrounded => isGrounded;
 
 
     void Awake()
@@ -47,21 +48,25 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H)) TakeDamage(1);
 
+        isGrounded = false;
+        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, 0.3f);
+        for (int i = 0; i < colls.Length; i++)
+        {
+            if (colls[i].gameObject.isStatic)
+            {
+                isGrounded = true;
+                break;
+            }
+        }
+
+        DebugTextManager.Instance.SetVariable("Grounded", isGrounded.ToString(), this);
+
+
         HandleSpriteFlipping();
         HandleInput();
         staminaManager.Update();
         stateMachine.CurrentState.UpdateState();
-
-
-        if (IsPlayer1)
-        {
-
-        }
-        else
-        {
-
-        }
-
+        HandleStateTransitions();
 
 
 
@@ -77,23 +82,34 @@ public class PlayerController : MonoBehaviour
         {
             inputVector = Vector2.zero;
 
-            if (IsPlayer1)
-            {
-                if (Input.GetKey(KeyCode.A)) inputVector.x = -1;
-                if (Input.GetKey(KeyCode.D)) inputVector.x += 1;
-
-                if (Input.GetKeyDown(KeyCode.W) && isGrounded) rb.AddForce(Vector2.up * movement.JumpForce, ForceMode2D.Impulse);
-            }
-            else
-            {
-                if (Input.GetKey(KeyCode.LeftArrow)) inputVector.x = -1;
-                if (Input.GetKey(KeyCode.RightArrow)) inputVector.x += 1;
-
-                if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded) rb.AddForce(Vector2.up * movement.JumpForce, ForceMode2D.Impulse);
-            }
+            if (Input.GetKey(GetKeyCodeForKey(Key.Left))) inputVector.x = -1;
+            if (Input.GetKey(GetKeyCodeForKey(Key.Right))) inputVector.x += 1;
 
             DebugTextManager.Instance.SetVariable($"Input", inputVector.ToString(), this);
             DebugTextManager.Instance.SetVariable($"Acceleration", acceleration.ToString(), this);
+        }
+
+        void HandleStateTransitions()
+        {
+            for (int i = 0; i < stateMachine.States.Count; i++)
+            {
+                State state = stateMachine.States[i];
+                PlayerState stateEnum = GetEnumForState(state);
+
+                if (stateMachine.CurrentState.ValidExitStates.Contains(stateEnum) && state.EnterPredicate(this)) stateMachine.EnterState(stateEnum);
+            }
+            //if (IsPlayer1)
+            //{
+            //    if (inputVector.x == 0 && rb.linearVelocityX.Abs() < 0.5f && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Idling)) stateMachine.EnterState(PlayerState.Idling);
+            //    else if (inputVector.x != 0 && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Moving)) stateMachine.EnterState(PlayerState.Moving);
+            //    else if (Input.GetKeyDown(KeyCode.C) && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Attacking)) stateMachine.EnterState(PlayerState.Attacking);
+            //    else if (Input.GetKeyDown(KeyCode.W) && isGrounded && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Jumping)) stateMachine.EnterState(PlayerState.Jumping);
+            //    else if (Input.GetKey(KeyCode.S) && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Blocking)) stateMachine.EnterState(PlayerState.Blocking);
+            //}
+            //else
+            //{
+            //
+            //}
         }
     }
 
@@ -123,10 +139,59 @@ public class PlayerController : MonoBehaviour
     {
         if (stateMachine.CurrentStateEnum == PlayerState.Blocking) staminaManager.TakeHit();
     }
+
+    public KeyCode GetKeyCodeForKey(Key key)
+    {
+        if (player1)
+        {
+            return key switch
+            {
+                Key.Jump => KeyCode.W,
+                Key.Block => KeyCode.S,
+                Key.Attack => KeyCode.C,
+                Key.Special => KeyCode.V,
+                Key.Left => KeyCode.A,
+                Key.Right => KeyCode.D,
+                _ => KeyCode.None
+            };
+        }
+        else
+        {
+            return key switch
+            {
+                Key.Jump => KeyCode.UpArrow,
+                Key.Block => KeyCode.DownArrow,
+                Key.Attack => KeyCode.Comma,
+                Key.Special => KeyCode.Period,
+                Key.Left => KeyCode.LeftArrow,
+                Key.Right => KeyCode.RightArrow,
+                _ => KeyCode.None
+            };
+        }
+    }
+    PlayerState GetEnumForState(State state)
+    {
+        if (state is JumpingState) return PlayerState.Jumping;
+        else if (state is MovingState) return PlayerState.Moving;
+        else if (state is AttackState) return PlayerState.Attacking;
+        else if (state is BlockingState) return PlayerState.Blocking;
+        else if (state is IdleState) return PlayerState.Idling;
+        else return PlayerState.Idling;
+    }
 }
 
 enum Direction
 {
+    Left,
+    Right
+}
+
+public enum Key
+{
+    Jump,
+    Block,
+    Attack,
+    Special,
     Left,
     Right
 }

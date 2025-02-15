@@ -7,6 +7,8 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] FrameAnimationSO player1AttackAnimation;
     [SerializeField] FrameAnimationSO player1MovingAnimation;
     [SerializeField] FrameAnimationSO player1IdleAnimation;
+    [SerializeField] FrameAnimationSO player1BlockAnimation;
+    [SerializeField] FrameAnimationSO player1JumpAnimation;
 
     public void Init()
     {
@@ -22,6 +24,8 @@ public class AnimationManager : MonoBehaviour
                 PlayerState.Attacking => player1AttackAnimation,
                 PlayerState.Moving => player1MovingAnimation,
                 PlayerState.Idling => player1IdleAnimation,
+                PlayerState.Blocking => player1BlockAnimation,
+                PlayerState.Jumping => player1JumpAnimation
             };
         }
         else return player1IdleAnimation;

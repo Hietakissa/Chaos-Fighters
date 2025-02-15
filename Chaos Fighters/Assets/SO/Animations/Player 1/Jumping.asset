@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f2678af1e27f0f45b63a9449b8631db, type: 3}
-  m_Name: Movement Settings
+  m_Script: {fileID: 11500000, guid: 760730b2778543e48837cf20e98aad32, type: 3}
+  m_Name: Jumping
   m_EditorClassIdentifier: 
-  moveSpeed: 3000
-  maxSpeed: 8
-  jumpForce: 6000000
-  gravityForce: 1
-  drag: 500
+  frames:
+  - {fileID: 7211190563001267890, guid: e6b050f71d4d39c46900eb3ba4f1be85, type: 3}
+  framerate: 5

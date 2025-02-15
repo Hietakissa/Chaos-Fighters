@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMachineController
@@ -9,8 +10,17 @@ public class StateMachineController
         attackState = new AttackState();
         movingState = new MovingState();
         idleState = new IdleState();
+        jumpingState = new JumpingState();
+        blockingState = new BlockingState();
+
+        states.Add(attackState);
+        states.Add(movingState);
+        states.Add(idleState);
+        states.Add(jumpingState);
+        states.Add(blockingState);
     }
 
+    List<State> states = new();
     PlayerController player;
 
     State currentState;
@@ -19,10 +29,13 @@ public class StateMachineController
     AttackState attackState;
     MovingState movingState;
     IdleState idleState;
+    JumpingState jumpingState;
+    BlockingState blockingState;
 
 
     public State CurrentState => currentState;
     public PlayerState CurrentStateEnum => currentStateEnum;
+    public List<State> States => states;
 
 
     public void EnterState(PlayerState state)
@@ -34,7 +47,9 @@ public class StateMachineController
             PlayerState.Attacking => attackState,
             PlayerState.Moving => movingState,
             PlayerState.Idling => idleState,
-            _ => attackState
+            PlayerState.Jumping => jumpingState,
+            PlayerState.Blocking => blockingState,
+            _ => idleState
         };
 
 
@@ -57,5 +72,6 @@ public enum PlayerState
     Attacking,
     Moving,
     Idling,
-    Blocking
+    Blocking,
+    Jumping
 }
