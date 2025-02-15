@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 760730b2778543e48837cf20e98aad32, type: 3}
-  m_Name: Jumping
+  m_Name: Moving
   m_EditorClassIdentifier: 
   frames:
-  - {fileID: 21300000, guid: 28194a826a997da409b860cd67e5342b, type: 3}
+  - {fileID: 21300000, guid: bcf87cf6f1833e14d959a17175744475, type: 3}
+  - {fileID: 21300000, guid: ae0c8243a2390b14ba0fa983f26c686e, type: 3}
+  - {fileID: 21300000, guid: 68493ba025e380f4d85db14dad5d7205, type: 3}
+  - {fileID: 21300000, guid: 922b1f765a6a3cb43b8eba5048192d76, type: 3}
+  - {fileID: 21300000, guid: cd6a4529cb081c941b751c6b422099de, type: 3}
   framerate: 5

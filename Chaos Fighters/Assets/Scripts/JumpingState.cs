@@ -6,7 +6,7 @@ public class JumpingState : State
     public override PlayerState[] ValidExitStates => new PlayerState[] { PlayerState.Idling, PlayerState.Moving };
     public override Predicate<PlayerController> EnterPredicate => (player =>
     {
-        return player.IsGrounded && Input.GetKeyDown(player.GetKeyCodeForKey(Key.Jump));
+        return !player.IsGrounded;
     });
     protected override bool LoopAnimation => true;
 
@@ -16,7 +16,7 @@ public class JumpingState : State
         base.EnterState();
 
 
-        player.RB.AddForce(Vector2.up * GameManager.Instance.MovementSettings.JumpForce, ForceMode2D.Impulse);
+        SetAnimationFrame();
     }
 
     public override void FixedUpdateState()

@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     public Vector2 InputVector => inputVector;
     public Rigidbody2D RB => rb;
     public bool IsGrounded => isGrounded;
+    public StaminaManager StaminaManager => staminaManager;
+    public Image DebugStaminaBar => debugStaminaBar;
 
 
     void Awake()
@@ -38,10 +40,10 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         movement = GameManager.Instance.MovementSettings;
-        staminaManager.Init();
+        staminaManager.Init(this);
 
         stateMachine = new StateMachineController(this);
-        stateMachine.EnterState(PlayerState.Moving);
+        stateMachine.EnterState(PlayerState.Idling);
     }
 
     void Update()
@@ -85,6 +87,8 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(GetKeyCodeForKey(Key.Left))) inputVector.x = -1;
             if (Input.GetKey(GetKeyCodeForKey(Key.Right))) inputVector.x += 1;
 
+            if (Input.GetKeyDown(GetKeyCodeForKey(Key.Jump))) rb.AddForce(Vector2.up * GameManager.Instance.MovementSettings.JumpForce, ForceMode2D.Impulse);
+
             DebugTextManager.Instance.SetVariable($"Input", inputVector.ToString(), this);
             DebugTextManager.Instance.SetVariable($"Acceleration", acceleration.ToString(), this);
         }
@@ -96,20 +100,9 @@ public class PlayerController : MonoBehaviour
                 State state = stateMachine.States[i];
                 PlayerState stateEnum = GetEnumForState(state);
 
-                if (stateMachine.CurrentState.ValidExitStates.Contains(stateEnum) && state.EnterPredicate(this)) stateMachine.EnterState(stateEnum);
+                //if (state == stateMachine.CurrentState && state.EnterPredicate(this)) return;
+                if (stateMachine.CurrentState.CanExit && stateMachine.CurrentState.ValidExitStates.Contains(stateEnum) && state.EnterPredicate(this)) stateMachine.EnterState(stateEnum);
             }
-            //if (IsPlayer1)
-            //{
-            //    if (inputVector.x == 0 && rb.linearVelocityX.Abs() < 0.5f && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Idling)) stateMachine.EnterState(PlayerState.Idling);
-            //    else if (inputVector.x != 0 && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Moving)) stateMachine.EnterState(PlayerState.Moving);
-            //    else if (Input.GetKeyDown(KeyCode.C) && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Attacking)) stateMachine.EnterState(PlayerState.Attacking);
-            //    else if (Input.GetKeyDown(KeyCode.W) && isGrounded && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Jumping)) stateMachine.EnterState(PlayerState.Jumping);
-            //    else if (Input.GetKey(KeyCode.S) && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Blocking)) stateMachine.EnterState(PlayerState.Blocking);
-            //}
-            //else
-            //{
-            //
-            //}
         }
     }
 

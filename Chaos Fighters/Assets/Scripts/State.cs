@@ -12,6 +12,7 @@ public abstract class State
     protected int animationIndex;
 
     protected virtual bool LoopAnimation => false;
+    public virtual bool CanExit => true;
     public virtual PlayerState[] ValidExitStates => Array.Empty<PlayerState>();
     public virtual Predicate<PlayerController> EnterPredicate => (p => p != null);
 
