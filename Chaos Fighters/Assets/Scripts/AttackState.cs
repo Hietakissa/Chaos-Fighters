@@ -2,18 +2,27 @@ using UnityEngine;
 
 public class AttackState : State
 {
+    protected override PlayerState[] ValidExitStates => new PlayerState[]{ PlayerState.Idling, PlayerState.Moving };
+
     public override void EnterState()
     {
-        throw new System.NotImplementedException();
-    }
+        base.EnterState();
 
-    public override void ExitState()
-    {
-        throw new System.NotImplementedException();
+
+        player.RB.linearVelocityX = 0f;
     }
 
     public override void UpdateState()
     {
-        throw new System.NotImplementedException();
+        base.UpdateState();
+
+
+        if (animationIndex > maxAnimationIndex) player.StateMachine.EnterState(PlayerState.Moving);
+        else SetAnimationFrame();
+    }
+
+    public override void FixedUpdateState()
+    {
+        player.HandleMovement(0);
     }
 }

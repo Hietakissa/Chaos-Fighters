@@ -1,8 +1,11 @@
+using HietakissaUtils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+
+    [SerializeField] SceneReference gameScene;
 
     void Start()
     {
@@ -11,8 +14,8 @@ public class MainMenuScript : MonoBehaviour
 
     public void PlayButton()
     {
-        //AudioManagerScript.instance.PlaySound("MenuOk");
-        SceneManager.LoadSceneAsync(1);
+        AudioManagerScript.instance.PlaySound("MenuOk");
+        SceneManager.LoadSceneAsync(gameScene);
         
     }
 
