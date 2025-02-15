@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using HietakissaUtils.QOL;
+using System.Collections;
 using UnityEngine;
-using System;
+using System.Text;
 using TMPro;
 
 public class DebugTextManager : MonoBehaviour
@@ -7,7 +10,10 @@ public class DebugTextManager : MonoBehaviour
     public static DebugTextManager Instance;
 
     [SerializeField] TextMeshProUGUI text;
-    string textString;
+
+    StringBuilder sb = new();
+    Dictionary<string, string> variables = new();
+    bool requireReBake;
 
     void Awake()
     {
@@ -16,17 +22,41 @@ public class DebugTextManager : MonoBehaviour
 
     void LateUpdate()
     {
-        text.text = textString;
-        textString = string.Empty;
+        if (!requireReBake) return;
+
+        sb.Clear();
+        foreach (KeyValuePair<string, string> pair in variables)
+        {
+            sb.AppendLine($"{pair.Key}: {pair.Value}");
+        }
+
+        text.text = sb.ToString();
+        requireReBake = false;
     }
 
 
-    public void Add(string text)
+    public void SetVariable(string key, string value)
     {
-        textString += text;
+        variables[key] = value;
+        requireReBake = true;
     }
-    public void AddLine(string text)
+
+    public void SetVariableFor(string key, string value, float time)
     {
-        textString += $"{text}{Environment.NewLine}";
+        SetVariable(key, value);
+        StartCoroutine(RemoveVariableAfter(key, time));
+    }
+
+    public void RemoveVariable(string key)
+    {
+        variables.Remove(key);
+        requireReBake = true;
+    }
+
+
+    IEnumerator RemoveVariableAfter(string key, float time)
+    {
+        yield return QOL.WaitForSeconds.Get(time);
+        RemoveVariable(key);
     }
 }

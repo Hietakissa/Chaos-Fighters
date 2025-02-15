@@ -7,10 +7,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] StaminaSettingsSO staminaSettings;
     [SerializeField] MovementSettingsSO movementSettings;
+    [SerializeField] CombatSettingsSO combatSettings;
 
 
     public StaminaSettingsSO StaminaSettings => staminaSettings;
     public MovementSettingsSO MovementSettings => movementSettings;
+    public CombatSettingsSO CombatSettings => combatSettings;
 
 
     void Awake()

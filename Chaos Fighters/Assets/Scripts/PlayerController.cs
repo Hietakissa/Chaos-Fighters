@@ -15,10 +15,10 @@ public class PlayerController : MonoBehaviour
 
     //[Header("Variables")]
     Rigidbody2D rb;
-    BoxCollider2D coll;
 
-    MovementSettingsSO movement;
+    StateMachineController stateMachineController = new StateMachineController();
     StaminaManager staminaManager = new StaminaManager();
+    MovementSettingsSO movement;
     Direction pointingDirection;
 
     Vector2 inputVector;
@@ -31,8 +31,9 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        DebugTextManager.Instance.SetVariableFor("Is blocking", blocking.ToString(), 3f);
+
         rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<BoxCollider2D>();
 
         movement = GameManager.Instance.MovementSettings;
         staminaManager.Init();
@@ -49,51 +50,54 @@ public class PlayerController : MonoBehaviour
         if (!player1) return;
         staminaManager.Update();
         debugStaminaBar.fillAmount = staminaManager.Stamina / GameManager.Instance.StaminaSettings.MaxStamina;
+
+
+        void HandleSpriteFlipping()
+        {
+            if (opponent.transform.position.x > transform.position.x) pointingDirection = Direction.Right;
+            else if (opponent.transform.position.x < transform.position.x) pointingDirection = Direction.Left;
+
+            spriteRend.flipX = pointingDirection != defaultPointingDirection;
+        }
+
+        void HandleInput()
+        {
+            inputVector = Vector2.zero;
+
+            if (IsPlayer1)
+            {
+                if (Input.GetKey(KeyCode.A)) inputVector.x = -1;
+                if (Input.GetKey(KeyCode.D)) inputVector.x += 1;
+
+                //if (Input.GetKeyDown(KeyCode.W)) velocity.y = movement.JumpForce;
+                if (Input.GetKeyDown(KeyCode.W)) rb.AddForce(Vector2.up * movement.JumpForce, ForceMode2D.Impulse);
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.LeftArrow)) inputVector.x = -1;
+                if (Input.GetKey(KeyCode.RightArrow)) inputVector.x += 1;
+
+                if (Input.GetKeyDown(KeyCode.UpArrow)) rb.AddForce(Vector2.up * movement.JumpForce, ForceMode2D.Impulse);
+            }
+
+            //if (player1) DebugTextManager.Instance.AddLine($"Input: {inputVector}");
+            //if (player1) DebugTextManager.Instance.AddLine($"Acceleration: {acceleration}");
+
+            if (player1) DebugTextManager.Instance.SetVariable("Input", inputVector.ToString());
+            if (player1) DebugTextManager.Instance.SetVariable("Acceleration", acceleration.ToString());
+        }
     }
 
     void FixedUpdate()
     {
-        HandleMovement();
+        stateMachineController.CurrentState.FixedUpdateState();
     }
 
-
-    void HandleSpriteFlipping()
-    {
-        if (opponent.transform.position.x > transform.position.x) pointingDirection = Direction.Right;
-        else if (opponent.transform.position.x < transform.position.x) pointingDirection = Direction.Left;
-
-        spriteRend.flipX = pointingDirection != defaultPointingDirection;
-    }
-
-    void HandleInput()
-    {
-        inputVector = Vector2.zero;
-
-        if (IsPlayer1)
-        {
-            if (Input.GetKey(KeyCode.A)) inputVector.x = -1;
-            if (Input.GetKey(KeyCode.D)) inputVector.x += 1;
-
-            //if (Input.GetKeyDown(KeyCode.W)) velocity.y = movement.JumpForce;
-            if (Input.GetKeyDown(KeyCode.W)) rb.AddForce(Vector2.up * movement.JumpForce, ForceMode2D.Impulse);
-        }
-        else
-        {
-            if (Input.GetKey(KeyCode.LeftArrow)) inputVector.x = -1;
-            if (Input.GetKey(KeyCode.RightArrow)) inputVector.x += 1;
-
-            if (Input.GetKeyDown(KeyCode.UpArrow)) rb.AddForce(Vector2.up * movement.JumpForce, ForceMode2D.Impulse);
-        }
-
-        if (player1) DebugTextManager.Instance.AddLine($"Input: {inputVector}");
-        if (player1) DebugTextManager.Instance.AddLine($"Acceleration: {acceleration}");
-    }
-
-    void HandleMovement()
+    public void HandleMovement()
     {
         acceleration = inputVector * movement.MoveSpeed;
         //acceleration.y += -9.81f * movement.GravityForce * Time.deltaTime; // Gravity
-        
+
         //velocity.x += velocity.x * -(movement.Drag * movement.Drag) * Time.deltaTime; // Horizontal drag
 
         //acceleration.x = Mathf.Clamp(acceleration.x, -movement.MaxSpeed, movement.MaxSpeed);
@@ -105,12 +109,10 @@ public class PlayerController : MonoBehaviour
         Vector2 force = acceleration * directionChangeMultiplier * Time.deltaTime;
         if (inputVector.x == 0) force += new Vector2(-rb.linearVelocityX * movement.Drag * Time.deltaTime, 0f);
         if (rb.linearVelocityY < 0f) force += Physics2D.gravity;
-        
+
         rb.AddForce(force);
         rb.linearVelocityX = Mathf.Clamp(rb.linearVelocityX, -movement.MaxSpeed, movement.MaxSpeed);
     }
-
-    
 
 
     public void TakeDamage(int damage)
