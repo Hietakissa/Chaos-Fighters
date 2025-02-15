@@ -3,7 +3,12 @@ guid: 3b16e4fbde537e94a97a1e95845b839f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kello
+    second: {fileID: 2100000, guid: 5fa5198e9b0f4dc4fa602f731d07f6bf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -3,7 +3,27 @@ guid: 26dd0d2c931980540aedce8668f1e49d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: iippa
+    second: {fileID: 2100000, guid: 64410efc0c9ccbb42b5e9c3113c594da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: katto
+    second: {fileID: 2100000, guid: fb5f9542e27393c449f5ac134083c043, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: talo
+    second: {fileID: 2100000, guid: e10bd1e4187210e4589c6518f7a7b3dc, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: iippa
+    second: {fileID: 2800000, guid: a36dc1ae7afc22340ae9468dbf5db90a, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

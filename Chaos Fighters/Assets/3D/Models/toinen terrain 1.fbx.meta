@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bc0019d3c5228a647bab0085f2847707
+guid: 3329978dac98d84438c711e87b625e3f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: joku matsku
-    second: {fileID: 2100000, guid: e41ab1811cb6a5843a72698a82099106, type: 2}
+    second: {fileID: 2100000, guid: 99744711e2e220142b5ad15318d70f69, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -3,7 +3,17 @@ guid: e13a7af2347c63942af632495f93ec12
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ryppy
+    second: {fileID: 2100000, guid: 588e14f46bb47d44db09b389a328cbe0, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ryppy
+    second: {fileID: 2800000, guid: b5d056deeeed94547ab7f6edf54340e2, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
