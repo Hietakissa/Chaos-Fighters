@@ -24,6 +24,6 @@ public class JumpingState : State
         base.FixedUpdateState();
 
 
-        player.HandleMovement(0.3f);
+        player.HandleMovement(0.15f, 0.05f);
     }
 }

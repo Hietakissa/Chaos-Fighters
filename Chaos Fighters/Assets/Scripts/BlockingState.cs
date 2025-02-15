@@ -10,6 +10,14 @@ public class BlockingState : State
     });
     protected override bool LoopAnimation => true;
 
+    public override void EnterState()
+    {
+        base.EnterState();
+
+
+        player.RB.linearVelocityX = 0f;
+    }
+
     public override void UpdateState()
     {
         base.UpdateState();
@@ -26,6 +34,6 @@ public class BlockingState : State
         base.FixedUpdateState();
 
 
-        player.HandleMovement(0.25f);
+        player.HandleMovement(0f);
     }
 }

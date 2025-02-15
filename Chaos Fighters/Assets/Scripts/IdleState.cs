@@ -7,7 +7,7 @@ public class IdleState : State
     public override PlayerState[] ValidExitStates => new PlayerState[] { PlayerState.Moving, PlayerState.Blocking, PlayerState.Attacking, PlayerState.Jumping };
     public override Predicate<PlayerController> EnterPredicate => (player =>
     {
-        return player.InputVector.x == 0 && player.RB.linearVelocityX.Abs() < 0.5f;
+        return player.InputVector.x == 0/* && player.RB.linearVelocityX.Abs() < 0.5f*/ && player.IsGrounded;
     });
     override protected bool LoopAnimation => true;
     
