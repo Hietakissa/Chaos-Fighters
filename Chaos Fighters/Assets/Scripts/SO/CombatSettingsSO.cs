@@ -7,7 +7,7 @@ public class CombatSettingsSO : ScriptableObject
     [SerializeField] int basicDamage;
     [SerializeField] int specialDamage;
 
-    public int MaxHealth;
-    public int BasicDamage;
-    public int SpecialDamage;
+    public int MaxHealth => maxHealth;
+    public int BasicDamage => basicDamage;
+    public int SpecialDamage => specialDamage;
 }

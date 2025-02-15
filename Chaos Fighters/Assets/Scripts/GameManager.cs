@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] MovementSettingsSO movementSettings;
     [SerializeField] CombatSettingsSO combatSettings;
 
-
     public StaminaSettingsSO StaminaSettings => staminaSettings;
     public MovementSettingsSO MovementSettings => movementSettings;
     public CombatSettingsSO CombatSettings => combatSettings;
@@ -18,5 +17,6 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        GetComponent<AnimationManager>().Init();
     }
 }
