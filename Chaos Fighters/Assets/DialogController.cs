@@ -45,6 +45,8 @@ public class DialogController : MonoBehaviour
     RoastOption[] leftOptions;
     RoastOption[] rightOptions;
 
+    public bool countingDown;
+
 
     void Start()
     {
@@ -54,8 +56,16 @@ public class DialogController : MonoBehaviour
 
     void Update()
     {
-        currentTime += Time.deltaTime;
-        float joo = Mathf.Floor(currentTime);
+        if (!countingDown) return;
+
+        currentTime -= Time.deltaTime;
+        if (currentTime < 0f)
+        {
+            currentTime = 0f;
+            countingDown = false;
+        }
+
+        float joo = Mathf.Ceil(currentTime);
         timer.text = joo.ToString();
     }
 
@@ -117,6 +127,9 @@ public class DialogController : MonoBehaviour
 
     void NewStuff()
     {
+        countingDown = true;
+        currentTime = timeToWait;
+
         currentRoast = roasts.RandomElement();
         leftOptions = currentRoast.Player1Options;
         rightOptions = currentRoast.Player2Options;
@@ -155,6 +168,26 @@ public class DialogController : MonoBehaviour
         right2.text = answers[x];
         x = Random.Range(0, answers.Length);
         right3.text = answers[x];*/
+    }
+
+    public void SetSelectedForSide(bool isLeft, int index)
+    {
+        if (isLeft)
+        {
+            for (int i = 0; i < leftTexts.Length; i++)
+            {
+                if (i == index) leftTexts[i].color = Color.yellow;
+                else leftTexts[i].color = Color.white;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < rightTexts.Length; i++)
+            {
+                if (i == index) rightTexts[i].color = Color.yellow;
+                else rightTexts[i].color = Color.white;
+            }
+        }
     }
 
     void StartGameScene()

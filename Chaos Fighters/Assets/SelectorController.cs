@@ -7,8 +7,17 @@ public class SelectorController : MonoBehaviour
     public bool Left = true;
     public int selectedNumber = 0;
 
+    [SerializeField] DialogController controller;
+
+    void Awake()
+    {
+        controller.SetSelectedForSide(Left, selectedNumber);
+    }
+
     void Update()
     {
+        if (!controller.countingDown) return;
+
         if (Left)
         {
             //if (Input.GetKeyDown(KeyCode.W))
@@ -21,6 +30,8 @@ public class SelectorController : MonoBehaviour
                     selectedNumber += 3;
                     gameObject.transform.Translate(Vector2.down * 3);
                 }
+
+                controller.SetSelectedForSide(Left, selectedNumber);
 
                 //if (selectedNumber > 0)
                 //{
@@ -41,6 +52,8 @@ public class SelectorController : MonoBehaviour
                     gameObject.transform.Translate(Vector2.up * 3);
                 }
 
+                controller.SetSelectedForSide(Left, selectedNumber);
+
                 //if (selectedNumber < 2) 
                 //{
                 //    selectedNumber++;
@@ -60,6 +73,9 @@ public class SelectorController : MonoBehaviour
                     selectedNumber += 3;
                     gameObject.transform.Translate(Vector2.down * 3);
                 }
+
+                controller.SetSelectedForSide(Left, selectedNumber);
+
                 //if (selectedNumber > 0)
                 //{
                 //    selectedNumber--;
@@ -77,6 +93,8 @@ public class SelectorController : MonoBehaviour
                     selectedNumber -= 3;
                     gameObject.transform.Translate(Vector2.up * 3);
                 }
+
+                controller.SetSelectedForSide(Left, selectedNumber);
 
                 //if (selectedNumber < 2)
                 //{
