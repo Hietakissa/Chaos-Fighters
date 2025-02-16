@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator LoadMenuSceneAfterSecondsCor(float seconds)
     {
         yield return QOL.WaitForSeconds.Get(seconds);
-        SceneManager.LoadScene(menuScene);
+        SceneManager.LoadScene(0);
     }
 
 

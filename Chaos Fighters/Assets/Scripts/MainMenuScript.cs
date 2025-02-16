@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuScript : MonoBehaviour
 {
 
-    [SerializeField] SceneReference gameScene;
+    //[SerializeField] SceneReference gameScene;
 
     void Start()
     {
@@ -16,7 +16,7 @@ public class MainMenuScript : MonoBehaviour
     public void PlayButton()
     {
         AudioManagerScript.instance.PlaySound("MenuOk");
-        SceneManager.LoadSceneAsync(gameScene);
+        SceneManager.LoadSceneAsync(1);
         
     }
 
