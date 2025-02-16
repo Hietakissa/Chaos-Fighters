@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tiikeri_defeat_0: -5217278239169932678
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

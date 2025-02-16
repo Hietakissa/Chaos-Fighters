@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      lihapulla_color_0: 939874431416369490
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
