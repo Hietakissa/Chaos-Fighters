@@ -33,7 +33,7 @@ public abstract class State
     }
     public virtual void UpdateState()
     {
-        animationTime += Time.deltaTime;
+        animationTime += Time.deltaTime * animation.Frames.Length;
         animationIndex = (int)Mathf.Floor(animationTime / animationStep);
         if (LoopAnimation) animationIndex %= (maxAnimationIndex + 1);
     }

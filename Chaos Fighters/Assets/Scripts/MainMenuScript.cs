@@ -1,4 +1,5 @@
 using HietakissaUtils;
+using HietakissaUtils.QOL;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,6 +28,6 @@ public class MainMenuScript : MonoBehaviour
     public void QuitButton()
     {
         AudioManagerScript.instance.PlaySound("MenuNegative");
-        Application.Quit();
+        QOL.Quit();
     }
 }

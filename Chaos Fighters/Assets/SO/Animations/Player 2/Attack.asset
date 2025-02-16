@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bcf87cf6f1833e14d959a17175744475, type: 3}
   - {fileID: 21300000, guid: 4b5544234364ddd4e8cf532352381ec9, type: 3}
   - {fileID: 21300000, guid: c2b5f3f5e7361a142ab663e8c2bbffd1, type: 3}
-  framerate: 12
+  framerate: 4

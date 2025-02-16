@@ -15,4 +15,4 @@ MonoBehaviour:
   frames:
   - {fileID: 21300000, guid: b8c1a201e194330498e019bb74abb845, type: 3}
   - {fileID: 21300000, guid: 8b188a6b5d3c8ce42bc35c40960a8ad1, type: 3}
-  framerate: 5
+  framerate: 4

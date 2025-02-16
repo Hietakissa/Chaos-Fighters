@@ -4,11 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-<<<<<<< HEAD
-  productGUID: d5f210b3730c3ee4d8ac5d4f2b105476
-=======
-  productGUID: a56f8f7a65929144fbc14d71a6278530
->>>>>>> d1002f8b882db582a680a8eca8dae9fb76180abd
+  productGUID: e4adf131bafb29b4ebe4ea940bd7bfb5
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -160,26 +156,18 @@ PlayerSettings:
   useHDRDisplay: 0
   hdrBitDepth: 0
   m_ColorGamuts: 00000000
-<<<<<<< HEAD
   targetPixelDensity: 30
-=======
-  targetPixelDensity: 0
->>>>>>> d1002f8b882db582a680a8eca8dae9fb76180abd
   resolutionScalingMode: 0
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.4
   androidMinAspectRatio: 1
   applicationIdentifier: {}
-<<<<<<< HEAD
   buildNumber:
     Standalone: 0
     VisionOS: 0
     iPhone: 0
     tvOS: 0
-=======
-  buildNumber: {}
->>>>>>> d1002f8b882db582a680a8eca8dae9fb76180abd
   overrideDefaultApplicationIdentifier: 0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 23
@@ -199,7 +187,6 @@ PlayerSettings:
   VertexChannelCompressionMask: 4054
   iPhoneSdkVersion: 988
   iOSSimulatorArchitecture: 0
-<<<<<<< HEAD
   iOSTargetOSVersionString: 13.0
   tvOSSdkVersion: 0
   tvOSSimulatorArchitecture: 0
@@ -207,15 +194,6 @@ PlayerSettings:
   tvOSTargetOSVersionString: 13.0
   VisionOSSdkVersion: 0
   VisionOSTargetOSVersionString: 1.0
-=======
-  iOSTargetOSVersionString: 
-  tvOSSdkVersion: 0
-  tvOSSimulatorArchitecture: 0
-  tvOSRequireExtendedGameController: 0
-  tvOSTargetOSVersionString: 
-  VisionOSSdkVersion: 0
-  VisionOSTargetOSVersionString: 
->>>>>>> d1002f8b882db582a680a8eca8dae9fb76180abd
   uIPrerenderedIcon: 0
   uIRequiresPersistentWiFi: 0
   uIRequiresFullScreen: 1
@@ -342,11 +320,7 @@ PlayerSettings:
   locationUsageDescription: 
   microphoneUsageDescription: 
   bluetoothUsageDescription: 
-<<<<<<< HEAD
   macOSTargetOSVersion: 11.0
-=======
-  macOSTargetOSVersion: 
->>>>>>> d1002f8b882db582a680a8eca8dae9fb76180abd
   switchNMETAOverride: 
   switchNetLibKey: 
   switchSocketMemoryPoolSize: 6144
@@ -696,11 +670,7 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 6
   captureStartupLogs: {}
-<<<<<<< HEAD
   activeInputHandler: 2
-=======
-  activeInputHandler: 0
->>>>>>> d1002f8b882db582a680a8eca8dae9fb76180abd
   windowsGamepadBackendHint: 0
   cloudProjectId: 
   framebufferDepthMemorylessMode: 0
