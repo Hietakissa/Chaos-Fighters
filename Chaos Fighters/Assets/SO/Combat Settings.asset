@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a062d6d0afb2474a8f986a9636b7b57, type: 3}
   m_Name: Combat Settings
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  basicDamage: 0
+  maxHealth: 100
+  basicDamage: 17
   specialDamage: 0
-  MaxHealth: 0
-  BasicDamage: 0
-  SpecialDamage: 0

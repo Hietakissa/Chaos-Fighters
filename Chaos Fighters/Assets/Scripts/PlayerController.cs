@@ -1,6 +1,10 @@
+using HietakissaUtils.QOL;
+using System.Collections;
 using HietakissaUtils;
 using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
@@ -12,6 +16,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool player1;
 
     [SerializeField] Image debugStaminaBar;
+    [SerializeField] BoxCollider2D normalAttackHitbox;
+
+    [SerializeField] TextMeshProUGUI victoryText;
+    [SerializeField] SceneReference menuScene;
 
     //[Header("Variables")]
     Rigidbody2D rb;
@@ -25,36 +33,52 @@ public class PlayerController : MonoBehaviour
     Vector2 acceleration;
     bool isGrounded;
 
+    int lives;
+    int health;
+
+    Vector2 startPos;
+
+    bool enabledInput = true;
+
+    public Vector2 ForceToAdd;
+
     public bool IsPlayer1 => player1;
     public StateMachineController StateMachine => stateMachine;
     public SpriteRenderer SpriteRenderer => spriteRend;
     public Vector2 InputVector => inputVector;
     public Rigidbody2D RB => rb;
     public bool IsGrounded => isGrounded;
+    public StaminaManager StaminaManager => staminaManager;
+    public Image DebugStaminaBar => debugStaminaBar;
+    public Vector2 FacingDirectionVector => (pointingDirection == Direction.Right ? Vector2.right : Vector2.left) + Vector2.up;
+    public BoxCollider2D NormalAttackHitbox => normalAttackHitbox;
+    public PlayerController Opponent => opponent;
 
 
     void Awake()
     {
+        startPos = transform.position;
         rb = GetComponent<Rigidbody2D>();
 
         movement = GameManager.Instance.MovementSettings;
-        staminaManager.Init();
+        health = GameManager.Instance.CombatSettings.MaxHealth;
+        lives = 3;
+        staminaManager.Init(this);
 
         stateMachine = new StateMachineController(this);
-        stateMachine.EnterState(PlayerState.Moving);
+        stateMachine.EnterState(PlayerState.Idling);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H)) TakeDamage(1);
-
         isGrounded = false;
-        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, 0.3f);
+        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, 0.45f);
         for (int i = 0; i < colls.Length; i++)
         {
             if (colls[i].gameObject.isStatic)
             {
                 isGrounded = true;
+                DebugTextManager.Instance.SetVariable("Standing On", colls[i].gameObject.name, this);
                 break;
             }
         }
@@ -62,18 +86,22 @@ public class PlayerController : MonoBehaviour
         DebugTextManager.Instance.SetVariable("Grounded", isGrounded.ToString(), this);
 
 
-        HandleSpriteFlipping();
-        HandleInput();
-        staminaManager.Update();
-        stateMachine.CurrentState.UpdateState();
-        HandleStateTransitions();
-
+        if (enabledInput)
+        {
+            HandleSpriteFlipping();
+            HandleInput();
+            staminaManager.Update();
+            stateMachine.CurrentState.UpdateState();
+            HandleStateTransitions();
+        }
 
 
         void HandleSpriteFlipping()
         {
             if (opponent.transform.position.x > transform.position.x) pointingDirection = Direction.Right;
             else if (opponent.transform.position.x < transform.position.x) pointingDirection = Direction.Left;
+            //if (inputVector.x > 0) pointingDirection = Direction.Right;
+            //else if (inputVector.x < 0) pointingDirection = Direction.Left;
 
             spriteRend.flipX = pointingDirection != defaultPointingDirection;
         }
@@ -84,6 +112,8 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(GetKeyCodeForKey(Key.Left))) inputVector.x = -1;
             if (Input.GetKey(GetKeyCodeForKey(Key.Right))) inputVector.x += 1;
+
+            if (Input.GetKeyDown(GetKeyCodeForKey(Key.Jump)) && isGrounded) rb.AddForce(Vector2.up * GameManager.Instance.MovementSettings.JumpForce, ForceMode2D.Impulse);
 
             DebugTextManager.Instance.SetVariable($"Input", inputVector.ToString(), this);
             DebugTextManager.Instance.SetVariable($"Acceleration", acceleration.ToString(), this);
@@ -96,29 +126,18 @@ public class PlayerController : MonoBehaviour
                 State state = stateMachine.States[i];
                 PlayerState stateEnum = GetEnumForState(state);
 
-                if (stateMachine.CurrentState.ValidExitStates.Contains(stateEnum) && state.EnterPredicate(this)) stateMachine.EnterState(stateEnum);
+                //if (state == stateMachine.CurrentState && state.EnterPredicate(this)) return;
+                if (stateMachine.CurrentState.CanExit && stateMachine.CurrentState.ValidExitStates.Contains(stateEnum) && state.EnterPredicate(this)) stateMachine.EnterState(stateEnum);
             }
-            //if (IsPlayer1)
-            //{
-            //    if (inputVector.x == 0 && rb.linearVelocityX.Abs() < 0.5f && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Idling)) stateMachine.EnterState(PlayerState.Idling);
-            //    else if (inputVector.x != 0 && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Moving)) stateMachine.EnterState(PlayerState.Moving);
-            //    else if (Input.GetKeyDown(KeyCode.C) && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Attacking)) stateMachine.EnterState(PlayerState.Attacking);
-            //    else if (Input.GetKeyDown(KeyCode.W) && isGrounded && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Jumping)) stateMachine.EnterState(PlayerState.Jumping);
-            //    else if (Input.GetKey(KeyCode.S) && stateMachine.CurrentState.ValidExitStates.Contains(PlayerState.Blocking)) stateMachine.EnterState(PlayerState.Blocking);
-            //}
-            //else
-            //{
-            //
-            //}
         }
     }
 
     void FixedUpdate()
     {
-        stateMachine.CurrentState.FixedUpdateState();
+        if (enabledInput) stateMachine.CurrentState.FixedUpdateState();
     }
 
-    public void HandleMovement(float speedMultiplier = 1f)
+    public void HandleMovement(float speedMultiplier = 1f, float horizontalDragMultiplier = 1f)
     {
         acceleration = inputVector * movement.MoveSpeed * speedMultiplier;
         acceleration.y = Mathf.Clamp(acceleration.y, -5f, 10f);
@@ -127,9 +146,14 @@ public class PlayerController : MonoBehaviour
         float directionChangeMultiplier = ((inputVector.x >= 0 && rb.linearVelocityX < 0) || (inputVector.x < 0 && rb.linearVelocityX >= 0) ? 2.5f : 1f);
 
         Vector2 force = acceleration * directionChangeMultiplier * Time.deltaTime;
-        if (inputVector.x == 0) force += new Vector2(-rb.linearVelocityX * movement.Drag * Time.deltaTime, 0f);
-        if (rb.linearVelocityY < 0f) force += Physics2D.gravity;
+        if (inputVector.x == 0) force += new Vector2(-rb.linearVelocityX * movement.Drag * Time.deltaTime, 0f) * horizontalDragMultiplier;
+        if (rb.linearVelocityY < 0f) force += Physics2D.gravity * movement.GravityForce;
 
+        if (ForceToAdd.magnitude > 0)
+        {
+            rb.AddForce(ForceToAdd, ForceMode2D.Impulse);
+            ForceToAdd = Vector2.zero;
+        }
         rb.AddForce(force);
         rb.linearVelocityX = Mathf.Clamp(rb.linearVelocityX, -movement.MaxSpeed, movement.MaxSpeed);
     }
@@ -138,6 +162,51 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (stateMachine.CurrentStateEnum == PlayerState.Blocking) staminaManager.TakeHit();
+        else
+        {
+            health -= damage;
+            DebugTextManager.Instance.SetVariable("Health", health.ToString(), this);
+
+            if (health <= 0)
+            {
+                LoseLife();
+            }
+        }
+    }
+
+    void LoseLife()
+    {
+        lives--;
+        
+
+        DebugTextManager.Instance.SetVariable("Lives", lives.ToString(), this);
+
+        if (lives <= 0)
+        {
+            enabledInput = false;
+            if (IsPlayer1) victoryText.text = "Bitch Star Wins!";
+            else victoryText.text = "Pawssacre Wins!";
+
+            StartCoroutine(LoadMenuSceneAfterSecondsCor(5f));
+        }
+        else
+        {
+            ResetRound();
+            opponent.ResetRound();
+        }
+    }
+
+    public void ResetRound()
+    {
+        transform.position = startPos;
+        pointingDirection = defaultPointingDirection;
+        rb.linearVelocity = Vector2.zero;
+        rb.simulated = false;
+        StartCoroutine(EnableRBAfterSecondsCor(0.25f));
+        //ForceToAdd = -rb.linearVelocity;
+        health = GameManager.Instance.CombatSettings.MaxHealth;
+
+        DebugTextManager.Instance.SetVariable("Health", health.ToString(), this);
     }
 
     public KeyCode GetKeyCodeForKey(Key key)
@@ -177,6 +246,31 @@ public class PlayerController : MonoBehaviour
         else if (state is BlockingState) return PlayerState.Blocking;
         else if (state is IdleState) return PlayerState.Idling;
         else return PlayerState.Idling;
+    }
+
+    IEnumerator EnableRBAfterSecondsCor(float seconds)
+    {
+        enabledInput = false;
+        rb.linearVelocity = Vector2.zero;
+        yield return QOL.WaitForSeconds.Get(seconds);
+        rb.linearVelocity = Vector2.zero;
+        rb.simulated = true;
+        enabledInput = true;
+    }
+
+    IEnumerator LoadMenuSceneAfterSecondsCor(float seconds)
+    {
+        yield return QOL.WaitForSeconds.Get(seconds);
+        SceneManager.LoadScene(menuScene);
+    }
+
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Kill Trigger"))
+        {
+            LoseLife();
+        }
     }
 }
 

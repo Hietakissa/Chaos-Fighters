@@ -69,7 +69,7 @@ public class DebugTextManager : MonoBehaviour
     public void SetVariableFor(string key, string value, float time, PlayerController player = null)
     {
         SetVariable(key, value, player);
-        StartCoroutine(RemoveVariableAfter(key, time));
+        StartCoroutine(RemoveVariableAfter(key, time, player));
     }
 
     public void RemoveVariable(string key, PlayerController player = null)
@@ -88,9 +88,9 @@ public class DebugTextManager : MonoBehaviour
     }
 
 
-    IEnumerator RemoveVariableAfter(string key, float time)
+    IEnumerator RemoveVariableAfter(string key, float time, PlayerController player = null)
     {
         yield return QOL.WaitForSeconds.Get(time);
-        RemoveVariable(key);
+        RemoveVariable(key, player);
     }
 }
