@@ -414,6 +414,7 @@ MonoBehaviour:
   rightCharacterIdle: {fileID: 726917492}
   leftCharacterWin: {fileID: 399911490}
   rightCharacterLose: {fileID: 1605827766}
+<<<<<<< Updated upstream
   roasts:
   - {fileID: 11400000, guid: 5a1345536b0d2e0408b2ec601b5dca98, type: 2}
   - {fileID: 11400000, guid: cb4a6162fd9c8a448bc29b16cbb4016c, type: 2}
@@ -426,6 +427,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 93da55dc62e9fe845be3279458aeea20, type: 2}
   p1Selector: {fileID: 521819168}
   p2Selector: {fileID: 1666310472}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &133918834
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,8 +25,11 @@ public class MainMenuScript : MonoBehaviour
     {
         //AudioManagerScript.instance.PlaySound("MenuOk");
         AudioManagerScript.instance.PlayRandomSound("Hit");
+<<<<<<< Updated upstream
         AudioManagerScript.instance.PlayRandomSound("LionPain");
         AudioManagerScript.instance.PlayRandomSound("WomanPain");
+=======
+>>>>>>> Stashed changes
     }
 
     public void QuitButton()
