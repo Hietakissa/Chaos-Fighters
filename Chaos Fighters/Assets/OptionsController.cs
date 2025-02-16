@@ -8,6 +8,7 @@ public class OptionsController : MonoBehaviour
     public void SoundVolume()
     {
         AudioManagerScript.instance.SoundVolume(soundSlider.value);
+        AudioManagerScript.instance.PlaySound("MenuOk");
     }
 
     public void MusicVolume()

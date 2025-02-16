@@ -24,6 +24,8 @@ public class MainMenuScript : MonoBehaviour
     {
         //AudioManagerScript.instance.PlaySound("MenuOk");
         AudioManagerScript.instance.PlayRandomSound("Hit");
+        AudioManagerScript.instance.PlayRandomSound("LionPain");
+        AudioManagerScript.instance.PlayRandomSound("WomanPain");
     }
 
     public void QuitButton()

@@ -61,53 +61,130 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   hitSounds:
-  - name: 
+  - name: a
     clip: {fileID: 8300000, guid: 047b4748f78816a41a62abbcb55901dc, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: 
+  - name: b
     clip: {fileID: 8300000, guid: aef012c9e567aec41ab45cc3d77db3e9, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: 
+  - name: b
     clip: {fileID: 8300000, guid: 8234a4ff65dff8841b88ecaca5496747, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: 
+  - name: b
     clip: {fileID: 8300000, guid: c2227bc4d29ab9741bec697e0fe55cbd, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: 
+  - name: b
     clip: {fileID: 8300000, guid: 4c21ce0aaef1c204a971ba0e0c5b1347, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: 
+  - name: b
     clip: {fileID: 8300000, guid: 910712dd536e66d4dbf3b57cdd06a8d7, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: 
+  - name: b
     clip: {fileID: 8300000, guid: 18451d73977d79e4ca5433398eaf6be7, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: 
+  - name: b
     clip: {fileID: 8300000, guid: d700360500bd34d48bce909f749d7319, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: 
+  - name: b
     clip: {fileID: 8300000, guid: a85e3775deffd3540aa77dfaa668724e, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-  - name: 
+  - name: b
     clip: {fileID: 8300000, guid: a0ac6cdadd2c02c49a5ffde89283e229, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: 37e7a9d6b5c78a94981ae5c6bd67c4a2, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: 750a95b8d9ac04b4baf6357a7e4f8358, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: d9d854ee9eada8c4ebb16aa9c4ef0938, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: be53045e4e4baf64c98ffe4e607646fc, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: 318e30383dab7e740be8fc91f84e396b, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: 034de4955711852468500aa647cc3517, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: 84cebad2d3b29154f8f5dd8ac6ddae18, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: 89a044d846723ad4d853c88879882daf, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: f4d77484a85908a48ad3a18749470a9f, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: d848abb5821d09142b7b3f330357b45d, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  lionPainSounds:
+  - name: a
+    clip: {fileID: 8300000, guid: 8ad0591c5fca67c47b11809ff5d1cee4, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: c75f6ed56b8cedc438cbea4a9e2179ea, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: c
+    clip: {fileID: 8300000, guid: 5fa10876e6ee8a04681f68dfab674abc, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  womanPainSounds:
+  - name: a
+    clip: {fileID: 8300000, guid: 968647545e266234ea133e55e770d854, type: 3}
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}
+  - name: b
+    clip: {fileID: 8300000, guid: ccf719665bafac24997a1e302c04c80c, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
