@@ -51,11 +51,8 @@ public class SelectorController : MonoBehaviour
         else
         {
             //if (Input.GetKeyDown(KeyCode.I))
-<<<<<<< Updated upstream
             if (Keyboard.current.upArrowKey.wasPressedThisFrame)
-=======
-            if (Keyboard.current.iKey.wasPressedThisFrame)
->>>>>>> Stashed changes
+
             {
                 selectedNumber--;
                 gameObject.transform.Translate(Vector2.up * 1);
@@ -72,11 +69,8 @@ public class SelectorController : MonoBehaviour
             }
 
             //if (Input.GetKeyDown(KeyCode.K))
-<<<<<<< Updated upstream
             if (Keyboard.current.downArrowKey.wasPressedThisFrame)
-=======
-            if (Keyboard.current.kKey.wasPressedThisFrame)
->>>>>>> Stashed changes
+
             {
                 selectedNumber++;
                 gameObject.transform.Translate(Vector2.down * 1);

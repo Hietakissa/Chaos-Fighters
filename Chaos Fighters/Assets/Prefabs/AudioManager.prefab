@@ -61,97 +61,56 @@ MonoBehaviour:
     pitch: 1
     source: {fileID: 0}
   hitSounds:
-<<<<<<< Updated upstream
   - name: a
-=======
-  - name: 
->>>>>>> Stashed changes
     clip: {fileID: 8300000, guid: 047b4748f78816a41a62abbcb55901dc, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-<<<<<<< Updated upstream
   - name: b
-=======
-  - name: 
->>>>>>> Stashed changes
     clip: {fileID: 8300000, guid: aef012c9e567aec41ab45cc3d77db3e9, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-<<<<<<< Updated upstream
   - name: b
-=======
-  - name: 
->>>>>>> Stashed changes
     clip: {fileID: 8300000, guid: 8234a4ff65dff8841b88ecaca5496747, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-<<<<<<< Updated upstream
   - name: b
-=======
-  - name: 
->>>>>>> Stashed changes
     clip: {fileID: 8300000, guid: c2227bc4d29ab9741bec697e0fe55cbd, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-<<<<<<< Updated upstream
   - name: b
-=======
-  - name: 
->>>>>>> Stashed changes
     clip: {fileID: 8300000, guid: 4c21ce0aaef1c204a971ba0e0c5b1347, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-<<<<<<< Updated upstream
   - name: b
-=======
-  - name: 
->>>>>>> Stashed changes
     clip: {fileID: 8300000, guid: 910712dd536e66d4dbf3b57cdd06a8d7, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-<<<<<<< Updated upstream
   - name: b
-=======
-  - name: 
->>>>>>> Stashed changes
     clip: {fileID: 8300000, guid: 18451d73977d79e4ca5433398eaf6be7, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-<<<<<<< Updated upstream
   - name: b
-=======
-  - name: 
->>>>>>> Stashed changes
     clip: {fileID: 8300000, guid: d700360500bd34d48bce909f749d7319, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-<<<<<<< Updated upstream
   - name: b
-=======
-  - name: 
->>>>>>> Stashed changes
     clip: {fileID: 8300000, guid: a85e3775deffd3540aa77dfaa668724e, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-<<<<<<< Updated upstream
   - name: b
-=======
-  - name: 
->>>>>>> Stashed changes
     clip: {fileID: 8300000, guid: a0ac6cdadd2c02c49a5ffde89283e229, type: 3}
     volume: 1
     pitch: 1
     source: {fileID: 0}
-<<<<<<< Updated upstream
   - name: b
     clip: {fileID: 8300000, guid: 37e7a9d6b5c78a94981ae5c6bd67c4a2, type: 3}
     volume: 1
@@ -229,7 +188,5 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
-=======
->>>>>>> Stashed changes
   soundVolume: 1
   musicMultiplier: 1
