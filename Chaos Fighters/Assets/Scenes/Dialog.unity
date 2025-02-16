@@ -417,7 +417,6 @@ MonoBehaviour:
   rightCharacterIdle: {fileID: 726917492}
   leftCharacterWin: {fileID: 399911490}
   rightCharacterLose: {fileID: 1605827766}
-<<<<<<< Updated upstream
   roasts:
   - {fileID: 11400000, guid: 5a1345536b0d2e0408b2ec601b5dca98, type: 2}
   - {fileID: 11400000, guid: cb4a6162fd9c8a448bc29b16cbb4016c, type: 2}
@@ -932,7 +931,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 99.81}
-  m_SizeDelta: {x: 200, y: 100}
+  m_SizeDelta: {x: 747.675, y: 197.2843}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &453074753
 MonoBehaviour:

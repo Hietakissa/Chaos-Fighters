@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentence: If I had to compliment you, I would say-
   player1Options:
-  - option: "You look\u2026 very intelegent for your age?"
+  - option: "You look\u2026 very intelligent for your age?"
     strength: 2
   - option: People probably feel intimidated by you.
     strength: 0
-  - option: "Those morning starts look dangerous\u2026 do they hurt?"
+  - option: "Those morningstars look dangerous\u2026 do they hurt?"
     strength: 1
   player2Options:
   - option: "You wouldn\u2019t look out of place in a body building competition."

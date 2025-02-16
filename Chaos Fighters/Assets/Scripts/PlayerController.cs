@@ -22,6 +22,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI victoryText;
     [SerializeField] SceneReference menuScene;
 
+    [SerializeField] Image healthFill;
+    [SerializeField] Image staminaFill;
+
+    [SerializeField] Sprite player1VictoryPose;
+    [SerializeField] Sprite player1DefeatPose;
+    [SerializeField] Sprite player2VictoryPose;
+    [SerializeField] Sprite player2DefeatPose;
+
+    [SerializeField] Image[] livesDisplay;
+
     //[Header("Variables")]
     Rigidbody2D rb;
 
@@ -111,11 +121,15 @@ public class PlayerController : MonoBehaviour
             lives = 2;
         }
 
+        UpdateLivesUI();
         DebugTextManager.Instance.SetVariable("Health", health.ToString(), this);
     }
 
     void Update()
     {
+        healthFill.fillAmount = (float)health / GameManager.Instance.CombatSettings.MaxHealth;
+        staminaFill.fillAmount = (float)staminaManager.Stamina / GameManager.Instance.StaminaSettings.MaxStamina;
+
         isGrounded = transform.position.y > -0.8f && transform.position.y < 0f;
         //isGrounded = false;
         //Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, 0.45f);
@@ -231,6 +245,8 @@ public class PlayerController : MonoBehaviour
     {
         this.lives = lives;
 
+        UpdateLivesUI();
+
         DebugTextManager.Instance.SetVariable("Lives", lives.ToString(), this);
 
         if (lives < 0)
@@ -248,6 +264,8 @@ public class PlayerController : MonoBehaviour
         lives--;
         RoastResult.RoastThisRound = false;
 
+        UpdateLivesUI();
+
 
         DebugTextManager.Instance.SetVariable("Lives", lives.ToString(), this);
 
@@ -257,12 +275,35 @@ public class PlayerController : MonoBehaviour
             if (IsPlayer1) victoryText.text = "Bitch Star Wins!";
             else victoryText.text = "Pawssacre Wins!";
 
+            SetLosePose();
+            opponent.SetVictoryPose();
+            opponent.enabledInput = false;
+
             StartCoroutine(LoadMenuSceneAfterSecondsCor(5f));
         }
         else
         {
             ResetRound();
             opponent.ResetRound();
+        }
+    }
+
+    void UpdateLivesUI()
+    {
+        if (lives == 2)
+        {
+            livesDisplay[0].gameObject.SetActive(true);
+            livesDisplay[1].gameObject.SetActive(true);
+        }
+        else if (lives == 1)
+        {
+            livesDisplay[0].gameObject.SetActive(true);
+            livesDisplay[1].gameObject.SetActive(false);
+        }
+        else
+        {
+            livesDisplay[0].gameObject.SetActive(false);
+            livesDisplay[1].gameObject.SetActive(false);
         }
     }
 
@@ -278,6 +319,18 @@ public class PlayerController : MonoBehaviour
         health = GameManager.Instance.CombatSettings.MaxHealth;
 
         DebugTextManager.Instance.SetVariable("Health", health.ToString(), this);
+    }
+
+    public void SetVictoryPose()
+    {
+        if (IsPlayer1) spriteRend.sprite = player1VictoryPose;
+        else spriteRend.sprite = player2VictoryPose;
+    }
+
+    public void SetLosePose()
+    {
+        if (IsPlayer1) spriteRend.sprite = player1DefeatPose;
+        else spriteRend.sprite = player2DefeatPose;
     }
 
     public KeyCode GetKeyCodeForKey(Key key)

@@ -1,4 +1,5 @@
 using HietakissaUtils;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -77,6 +78,7 @@ public class DialogController : MonoBehaviour
         int p1Strength = leftOptions[p1Index].Strength;
         int p2Strength = rightOptions[p2Index].Strength;
         bool tie = p1Strength == p2Strength;
+        bool p1Win = p1Strength > p2Strength;
 
         if (tie)
         {
@@ -85,7 +87,6 @@ public class DialogController : MonoBehaviour
         }
         else
         {
-            bool p1Win = p1Strength > p2Strength;
             if (p1Win)
             {
                 RoastResult.Player1Damage = 0;
@@ -97,6 +98,12 @@ public class DialogController : MonoBehaviour
                 RoastResult.Player2Damage = 0;
             }
         }
+
+        if (tie) timer.text = $"Tie!{Environment.NewLine}-15 to both!";
+        else if (p1Win) timer.text = $"Pawssacre Wins!{Environment.NewLine}-{RoastResult.Player2Damage} to Bitch Star!";
+        else timer.text = $"Bitch Star Wins!{Environment.NewLine}-{RoastResult.Player1Damage} to Pawssacre!";
+
+        countingDown = false;
 
         RoastResult.RoastComplete = true;
         RoastResult.RoastThisRound = true;
@@ -192,7 +199,7 @@ public class DialogController : MonoBehaviour
 
     void StartGameScene()
     {
-        SceneManager.LoadSceneAsync(gameScene);
+        SceneManager.LoadSceneAsync(1);
     }
     
 }

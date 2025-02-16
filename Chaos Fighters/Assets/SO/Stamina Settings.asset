@@ -16,5 +16,5 @@ MonoBehaviour:
   staminaRegenerationRate: 15
   staminaRegerationDelay: 1.5
   staminaDepletionDelay: 3.5
-  passiveBlockStaminaConsumption: 20
-  blockHitStaminaConsumption: 15
+  passiveBlockStaminaConsumption: 15
+  blockHitStaminaConsumption: 20

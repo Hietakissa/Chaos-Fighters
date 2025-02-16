@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Combat Settings
   m_EditorClassIdentifier: 
   maxHealth: 100
-  basicDamage: 17
+  basicDamage: 12
   specialDamage: 0
