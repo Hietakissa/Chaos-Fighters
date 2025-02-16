@@ -44,6 +44,7 @@ public class AttackState : State
                     player.Opponent.TakeDamage(GameManager.Instance.CombatSettings.BasicDamage);
                     //player.Opponent.RB.AddForce((player.Opponent.transform.position - player.transform.position).normalized * Vector2.right * 50f, ForceMode2D.Impulse);
                     player.Opponent.ForceToAdd += (player.Opponent.transform.position - player.transform.position).normalized * Vector2.right * 500f;
+                    AudioManagerScript.instance.PlayRandomSound("Hit");
                 }
             }
         }

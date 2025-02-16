@@ -53,7 +53,6 @@ public class StateMachineController
         };
 
 
-        Debug.Log($"current state: {currentStateEnum}, next state: {nextState}");
         if (nextState != currentState)
         {
             currentState?.ExitState();
