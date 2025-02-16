@@ -1,3 +1,12 @@
+<<<<<<< Updated upstream
+=======
+using System;
+using System.Collections.Generic;
+
+using Unity.Mathematics;
+
+using UnityEditor.Rendering;
+>>>>>>> Stashed changes
 using UnityEngine;
 using System;
 
@@ -11,6 +20,7 @@ public class AudioManagerScript : MonoBehaviour
     */
 
     public Sound[] sounds;
+    public Sound[] hitSounds;
 
     public float soundVolume = 1;
     public float musicMultiplier = 1;
@@ -28,7 +38,7 @@ public class AudioManagerScript : MonoBehaviour
             return;
         }
 
-        //DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
         
         foreach (Sound s in sounds)
         {
@@ -38,7 +48,28 @@ public class AudioManagerScript : MonoBehaviour
 
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
-        } 
+        }
+
+        foreach (Sound s in hitSounds)
+        {
+
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+        }
+    }
+
+    public void PlayRandomSound(string name)
+    {
+        if (name == "Hit")
+        {
+            int x = UnityEngine.Random.Range(0, sounds.Length);
+            Sound s = hitSounds[x];
+            s.source.volume = soundVolume;
+            s.source.Play();
+        }
     }
 
     public void PlaySound(string name)
