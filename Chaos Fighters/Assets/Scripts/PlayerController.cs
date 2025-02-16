@@ -74,17 +74,18 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        isGrounded = false;
-        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, 0.45f);
-        for (int i = 0; i < colls.Length; i++)
-        {
-            if (colls[i].gameObject.isStatic)
-            {
-                isGrounded = true;
-                DebugTextManager.Instance.SetVariable("Standing On", colls[i].gameObject.name, this);
-                break;
-            }
-        }
+        isGrounded = transform.position.y > -0.8f && transform.position.y < 0f;
+        //isGrounded = false;
+        //Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, 0.45f);
+        //for (int i = 0; i < colls.Length; i++)
+        //{
+        //    DebugTextManager.Instance.SetVariable($"Standing On[{i}]", $"{colls[i].gameObject.name}{(colls[i].gameObject.isStatic ? "(Ground)" : "")}", this);
+        //    if (colls[i].gameObject.isStatic)
+        //    {
+        //        isGrounded = true;
+        //        break;
+        //    }
+        //}
 
         DebugTextManager.Instance.SetVariable("Grounded", isGrounded.ToString(), this);
 

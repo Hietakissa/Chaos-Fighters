@@ -1,12 +1,3 @@
-<<<<<<< Updated upstream
-=======
-using System;
-using System.Collections.Generic;
-
-using Unity.Mathematics;
-
-using UnityEditor.Rendering;
->>>>>>> Stashed changes
 using UnityEngine;
 using System;
 

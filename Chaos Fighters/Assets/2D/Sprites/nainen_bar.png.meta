@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      nainen_bar_0: -623988297873326042
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
