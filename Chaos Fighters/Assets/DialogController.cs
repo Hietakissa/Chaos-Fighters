@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class DialogController : MonoBehaviour
 {
+    public GameObject leftSelector;
+    public GameObject rightSelector;
+
     public TextMeshProUGUI timer;
 
     public TextMeshProUGUI promptPanel;
@@ -27,6 +30,7 @@ public class DialogController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        NewStuff();
         
     }
 
@@ -34,14 +38,31 @@ public class DialogController : MonoBehaviour
     void Update()
     {
         
-        currentTime += Time.deltaTime;
-        float joo = Mathf.Floor(currentTime);
-        timer.text = joo.ToString();
 
         if (currentTime > timeToWait)
-        { 
-            currentTime = 0;
-            NewStuff();
+        {
+            //currentTime = 0;
+            //NewStuff();
+
+            left1.text = "";
+            left2.text = "Hehehe";
+            left3.text = "";
+            
+            promptPanel.text = "Player 1 wins!";
+
+            right1.text = "";
+            right2.text = "This is not right!";
+            right3.text = "";
+
+            leftSelector.SetActive(false);
+            rightSelector.SetActive(false);
+
+        }
+        else
+        {
+            currentTime += Time.deltaTime;
+            float joo = Mathf.Floor(currentTime);
+            timer.text = joo.ToString();
         }
     }
 
