@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Nainen_defeat_0: 6935814248541549392
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,7 +1,7 @@
-using HietakissaUtils;
-using HietakissaUtils.QOL;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using HietakissaUtils.QOL;
+using HietakissaUtils;
+using UnityEngine;
 
 public class MainMenuScript : MonoBehaviour
 {
@@ -17,7 +17,8 @@ public class MainMenuScript : MonoBehaviour
     {
         AudioManagerScript.instance.PlaySound("MenuOk");
         SceneManager.LoadSceneAsync(1);
-        
+        RoastResult.RoastComplete = false;
+        RoastResult.RoastThisRound = false;
     }
 
     public void OptionsButton()

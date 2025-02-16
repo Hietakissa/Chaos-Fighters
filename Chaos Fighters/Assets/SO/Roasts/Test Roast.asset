@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b5511ca8324d66478223ca37e83bd1f, type: 3}
-  m_Name: Test
+  m_Name: Test Roast
   m_EditorClassIdentifier: 
-  sentence: What the...
+  sentence: Skibidi toilet is...
   player1Options:
-  - option: Skibidi
-    strength: 0
-  - option: Gato
+  - option: funny
+    strength: 2
+  - option: not funny
+    strength: 1
+  - option: cringe
     strength: 0
   player2Options:
-  - option: asdf
-    strength: 3
-  - option: gfddfsg
+  - option: life
+    strength: 0
+  - option: sigma rizz
+    strength: 2
+  - option: gyat
     strength: 1

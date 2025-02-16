@@ -64,12 +64,54 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         movement = GameManager.Instance.MovementSettings;
-        health = GameManager.Instance.CombatSettings.MaxHealth;
-        lives = 2;
+        
         staminaManager.Init(this);
 
         stateMachine = new StateMachineController(this);
         stateMachine.EnterState(PlayerState.Idling);
+
+        if (RoastResult.RoastComplete)
+        {
+            RoastResult.RoastLoads++;
+            
+            if (RoastResult.RoastLoads == 2)
+            {
+                if (IsPlayer1)
+                {
+                    SetLives(RoastResult.Player1LivesBeforeRoast);
+                    opponent.SetLives(RoastResult.Player2LivesBeforeRoast);
+
+                    health = RoastResult.Player1HealthBeforeRoast;
+                    opponent.health = RoastResult.Player2HealthBeforeRoast;
+
+                    TakeDamage(RoastResult.Player1Damage);
+                    opponent.TakeDamage(RoastResult.Player2Damage);
+                }
+                else
+                {
+                    SetLives(RoastResult.Player2LivesBeforeRoast);
+                    opponent.SetLives(RoastResult.Player1LivesBeforeRoast);
+
+                    health = RoastResult.Player2HealthBeforeRoast;
+                    opponent.health = RoastResult.Player1HealthBeforeRoast;
+
+                    TakeDamage(RoastResult.Player2Damage);
+                    opponent.TakeDamage(RoastResult.Player1Damage);
+                }
+
+                // Last to load > clean up
+                RoastResult.RoastComplete = false;
+                RoastResult.RoastLoads = 0;
+            }
+        }
+        else
+        {
+            // Roast not complete > entered from main menu > set default lives and health
+            health = GameManager.Instance.CombatSettings.MaxHealth;
+            lives = 2;
+        }
+
+        DebugTextManager.Instance.SetVariable("Health", health.ToString(), this);
     }
 
     void Update()
@@ -177,14 +219,35 @@ public class PlayerController : MonoBehaviour
             {
                 LoseLife();
             }
+            else if (health <= 50 && !RoastResult.RoastThisRound)
+            {
+                StartCoroutine(LoadRoastCor());
+            }
         }
         OnHit?.Invoke();
+    }
+
+    void SetLives(int lives)
+    {
+        this.lives = lives;
+
+        DebugTextManager.Instance.SetVariable("Lives", lives.ToString(), this);
+
+        if (lives < 0)
+        {
+            enabledInput = false;
+            if (IsPlayer1) victoryText.text = "Bitch Star Wins!";
+            else victoryText.text = "Pawssacre Wins!";
+
+            StartCoroutine(LoadMenuSceneAfterSecondsCor(5f));
+        }
     }
 
     void LoseLife()
     {
         lives--;
-        
+        RoastResult.RoastThisRound = false;
+
 
         DebugTextManager.Instance.SetVariable("Lives", lives.ToString(), this);
 
@@ -269,7 +332,35 @@ public class PlayerController : MonoBehaviour
     IEnumerator LoadMenuSceneAfterSecondsCor(float seconds)
     {
         yield return QOL.WaitForSeconds.Get(seconds);
-        SceneManager.LoadScene(0);
+        stateMachine.CurrentState?.ExitState();
+        yield return SceneManager.LoadSceneAsync(0);
+    }
+
+    IEnumerator LoadRoastCor()
+    {
+        enabledInput = false;
+        opponent.enabledInput = false;
+
+        if (IsPlayer1)
+        {
+            RoastResult.Player1LivesBeforeRoast = lives;
+            RoastResult.Player2LivesBeforeRoast = opponent.lives;
+
+            RoastResult.Player1HealthBeforeRoast = health;
+            RoastResult.Player2HealthBeforeRoast = opponent.health;
+        }
+        else
+        {
+            RoastResult.Player1LivesBeforeRoast = opponent.lives;
+            RoastResult.Player2LivesBeforeRoast = lives;
+
+            RoastResult.Player1HealthBeforeRoast = opponent.health;
+            RoastResult.Player2HealthBeforeRoast = health;
+        }
+
+        RoastResult.RoastThisRound = true;
+        stateMachine.CurrentState?.ExitState();
+        yield return SceneManager.LoadSceneAsync(2);
     }
 
 

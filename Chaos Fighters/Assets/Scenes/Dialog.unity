@@ -377,6 +377,14 @@ MonoBehaviour:
   rightSelector: {fileID: 1666310469}
   timer: {fileID: 453074753}
   promptPanel: {fileID: 441225554}
+  leftTexts:
+  - {fileID: 804410684}
+  - {fileID: 1391567851}
+  - {fileID: 712440728}
+  rightTexts:
+  - {fileID: 179239441}
+  - {fileID: 19868165}
+  - {fileID: 608724652}
   left1: {fileID: 804410684}
   left2: {fileID: 1391567851}
   left3: {fileID: 712440728}
@@ -406,6 +414,18 @@ MonoBehaviour:
   rightCharacterIdle: {fileID: 726917492}
   leftCharacterWin: {fileID: 399911490}
   rightCharacterLose: {fileID: 1605827766}
+  roasts:
+  - {fileID: 11400000, guid: 5a1345536b0d2e0408b2ec601b5dca98, type: 2}
+  - {fileID: 11400000, guid: cb4a6162fd9c8a448bc29b16cbb4016c, type: 2}
+  - {fileID: 11400000, guid: 6a5964e464c9e8544afe74f7eaf424a1, type: 2}
+  - {fileID: 11400000, guid: 9d123630baca81f46a6cf6b721740c3f, type: 2}
+  - {fileID: 11400000, guid: b8158e3c9fc38014e90248bd2c2ce607, type: 2}
+  - {fileID: 11400000, guid: 3ee3267305d68d6419adf73688c76c9a, type: 2}
+  - {fileID: 11400000, guid: 58fea5671ce2d354c9cc92c289cd8473, type: 2}
+  - {fileID: 11400000, guid: 76ff1d08d165d0d419359a91246a819b, type: 2}
+  - {fileID: 11400000, guid: 93da55dc62e9fe845be3279458aeea20, type: 2}
+  p1Selector: {fileID: 521819168}
+  p2Selector: {fileID: 1666310472}
 --- !u!1 &133918834
 GameObject:
   m_ObjectHideFlags: 0

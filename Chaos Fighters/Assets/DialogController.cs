@@ -13,6 +13,8 @@ public class DialogController : MonoBehaviour
 
     public TextMeshProUGUI promptPanel;
 
+    [SerializeField] TextMeshProUGUI[] leftTexts;
+    [SerializeField] TextMeshProUGUI[] rightTexts;
     public TextMeshProUGUI left1;
     public TextMeshProUGUI left2;
     public TextMeshProUGUI left3;
@@ -34,6 +36,16 @@ public class DialogController : MonoBehaviour
     public GameObject leftCharacterWin;
     public GameObject rightCharacterLose;
 
+    [SerializeField] RoastBattleOptionSO[] roasts;
+    RoastBattleOptionSO currentRoast;
+
+    [SerializeField] SelectorController p1Selector;
+    [SerializeField] SelectorController p2Selector;
+
+    RoastOption[] leftOptions;
+    RoastOption[] rightOptions;
+
+
     void Start()
     {
         NewStuff();
@@ -42,43 +54,95 @@ public class DialogController : MonoBehaviour
 
     void Update()
     {
-            currentTime += Time.deltaTime;
-            float joo = Mathf.Floor(currentTime);
-            timer.text = joo.ToString();
-
+        currentTime += Time.deltaTime;
+        float joo = Mathf.Floor(currentTime);
+        timer.text = joo.ToString();
     }
 
     void AnnounceWinner()
     {
-        left1.text = "";
-        left2.text = "Hehehe";
-        left3.text = "";
+        int p1Index = p1Selector.selectedNumber;
+        int p2Index = p2Selector.selectedNumber;
 
-        promptPanel.text = "Player 1 wins!";
+        int p1Strength = leftOptions[p1Index].Strength;
+        int p2Strength = rightOptions[p2Index].Strength;
+        bool tie = p1Strength == p2Strength;
 
-        right1.text = "";
-        right2.text = "This is not right!";
-        right3.text = "";
+        if (tie)
+        {
+            RoastResult.Player1Damage = 15;
+            RoastResult.Player2Damage = 15;
+        }
+        else
+        {
+            bool p1Win = p1Strength > p2Strength;
+            if (p1Win)
+            {
+                RoastResult.Player1Damage = 0;
+                RoastResult.Player2Damage = 25;
+            }
+            else
+            {
+                RoastResult.Player1Damage = 25;
+                RoastResult.Player2Damage = 0;
+            }
+        }
 
-        leftSelector.SetActive(false);
-        rightSelector.SetActive(false);
+        RoastResult.RoastComplete = true;
+        RoastResult.RoastThisRound = true;
+        RoastResult.RoastLoads = 0;
+        Debug.Log($"tie: {tie}, p1win: {p1Strength > p2Strength}, p1dmg: {RoastResult.Player1Damage}, p2dmg: {RoastResult.Player2Damage}");
 
-        leftCharacterIdle.SetActive(false);
-        rightCharacterIdle.SetActive(false);
-        leftCharacterWin.SetActive(true);
-        rightCharacterLose.SetActive(true);
+
+        //left1.text = "";
+        //left2.text = "Hehehe";
+        //left3.text = "";
+        //
+        //promptPanel.text = "Player 1 wins!";
+        //
+        //right1.text = "";
+        //right2.text = "This is not right!";
+        //right3.text = "";
+        //
+        //leftSelector.SetActive(false);
+        //rightSelector.SetActive(false);
+        //
+        //leftCharacterIdle.SetActive(false);
+        //rightCharacterIdle.SetActive(false);
+        //leftCharacterWin.SetActive(true);
+        //rightCharacterLose.SetActive(true);
 
         Invoke("StartGameScene", 3.0f);
     }
 
     void NewStuff()
     {
-        Debug.Log(promptPanel);
-        promptPanel.text = "hahaha";
-        int x = Random.Range(0, prompts.Length);
-        promptPanel.text = prompts[x];
+        currentRoast = roasts.RandomElement();
+        leftOptions = currentRoast.Player1Options;
+        rightOptions = currentRoast.Player2Options;
 
-        x = Random.Range(0, answers.Length);
+        leftOptions.Shuffle();
+        rightOptions.Shuffle();
+
+
+        promptPanel.text = currentRoast.Sentence;
+
+        for (int i = 0; i < leftTexts.Length; i++)
+        {
+            leftTexts[i].text = leftOptions[i].Option;
+        }
+
+        for (int i = 0; i < rightTexts.Length; i++)
+        {
+            rightTexts[i].text = rightOptions[i].Option;
+        }
+
+        //Debug.Log(promptPanel);
+        //promptPanel.text = "hahaha";
+        //int x = Random.Range(0, prompts.Length);
+        //promptPanel.text = prompts[x];
+
+        /*x = Random.Range(0, answers.Length);
         left1.text = answers[x];
         x = Random.Range(0, answers.Length);
         left2.text = answers[x];
@@ -90,7 +154,7 @@ public class DialogController : MonoBehaviour
         x = Random.Range(0, answers.Length);
         right2.text = answers[x];
         x = Random.Range(0, answers.Length);
-        right3.text = answers[x];
+        right3.text = answers[x];*/
     }
 
     void StartGameScene()
