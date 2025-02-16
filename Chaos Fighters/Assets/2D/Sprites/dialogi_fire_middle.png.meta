@@ -172,7 +172,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      dialogi_fire_middle_0: -4997083552656227410
+      dialogi_fire_middle_1: -6570566421221768890
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
