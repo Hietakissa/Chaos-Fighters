@@ -13,6 +13,7 @@ public abstract class State
 
     protected virtual bool LoopAnimation => false;
     protected virtual bool InvertAnimation => false;
+    protected virtual FrameAnimationSO OverriddenAnimation => null;
     public virtual bool CanExit => true;
     public virtual PlayerState[] ValidExitStates => Array.Empty<PlayerState>();
     public virtual Predicate<PlayerController> EnterPredicate => (p => p != null);
@@ -27,6 +28,7 @@ public abstract class State
 
         animationStep = 1f / animation.Framerate;
         maxAnimationIndex = animation.Frames.Length - 1;
+        Initialized = true;
     }
     public virtual void EnterState()
     {
@@ -58,6 +60,7 @@ public abstract class State
 
     protected void SetAnimationFrame()
     {
-        player.SpriteRenderer.sprite = animation.Frames[animationIndex];
+        if (OverriddenAnimation != null) player.SpriteRenderer.sprite = OverriddenAnimation.Frames[animationIndex];
+        else player.SpriteRenderer.sprite = animation.Frames[animationIndex];
     }
 }

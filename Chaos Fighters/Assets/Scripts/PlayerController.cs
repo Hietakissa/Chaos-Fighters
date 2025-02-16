@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     Vector2 inputVector;
     Vector2 acceleration;
     bool isGrounded;
+    public bool IsBlocking;
 
     int lives;
     int health;
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 FacingDirectionVector => (pointingDirection == Direction.Right ? Vector2.right : Vector2.left) + Vector2.up;
     public BoxCollider2D NormalAttackHitbox => normalAttackHitbox;
     public PlayerController Opponent => opponent;
+    public event Action OnHit;
 
 
     void Awake()
@@ -113,7 +116,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(GetKeyCodeForKey(Key.Left))) inputVector.x = -1;
             if (Input.GetKey(GetKeyCodeForKey(Key.Right))) inputVector.x += 1;
 
-            if (Input.GetKeyDown(GetKeyCodeForKey(Key.Jump)) && isGrounded) rb.AddForce(Vector2.up * GameManager.Instance.MovementSettings.JumpForce, ForceMode2D.Impulse);
+            if (Input.GetKeyDown(GetKeyCodeForKey(Key.Jump)) && isGrounded && !IsBlocking) rb.AddForce(Vector2.up * GameManager.Instance.MovementSettings.JumpForce, ForceMode2D.Impulse);
 
             DebugTextManager.Instance.SetVariable($"Input", inputVector.ToString(), this);
             DebugTextManager.Instance.SetVariable($"Acceleration", acceleration.ToString(), this);
@@ -127,6 +130,8 @@ public class PlayerController : MonoBehaviour
                 PlayerState stateEnum = GetEnumForState(state);
 
                 //if (state == stateMachine.CurrentState && state.EnterPredicate(this)) return;
+                //if (stateMachine.CurrentState.EnterPredicate(this)) return;
+                //if (IsBlocking && stateMachine.CurrentStateEnum == PlayerState.Blocking) return;
                 if (stateMachine.CurrentState.CanExit && stateMachine.CurrentState.ValidExitStates.Contains(stateEnum) && state.EnterPredicate(this)) stateMachine.EnterState(stateEnum);
             }
         }
@@ -172,6 +177,7 @@ public class PlayerController : MonoBehaviour
                 LoseLife();
             }
         }
+        OnHit?.Invoke();
     }
 
     void LoseLife()

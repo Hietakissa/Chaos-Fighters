@@ -8,13 +8,19 @@ public class AnimationManager : MonoBehaviour
     [SerializeField] FrameAnimationSO player1MovingAnimation;
     [SerializeField] FrameAnimationSO player1IdleAnimation;
     [SerializeField] FrameAnimationSO player1BlockAnimation;
+    [SerializeField] FrameAnimationSO player1BlockHitAnimation;
     [SerializeField] FrameAnimationSO player1JumpAnimation;
 
     [SerializeField] FrameAnimationSO player2AttackAnimation;
     [SerializeField] FrameAnimationSO player2MovingAnimation;
     [SerializeField] FrameAnimationSO player2IdleAnimation;
     [SerializeField] FrameAnimationSO player2BlockAnimation;
+    [SerializeField] FrameAnimationSO player2BlockHitAnimation;
     [SerializeField] FrameAnimationSO player2JumpAnimation;
+
+
+    public FrameAnimationSO Player1BlockHitAnimation => player1BlockHitAnimation;
+    public FrameAnimationSO Player2BlockHitAnimation => player2BlockHitAnimation;
 
     public void Init()
     {
