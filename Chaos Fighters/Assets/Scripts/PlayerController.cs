@@ -211,6 +211,7 @@ public class PlayerController : MonoBehaviour
         rb.simulated = false;
         StartCoroutine(EnableRBAfterSecondsCor(0.25f));
         //ForceToAdd = -rb.linearVelocity;
+        staminaManager.ReplenishStamina(GameManager.Instance.StaminaSettings.MaxStamina);
         health = GameManager.Instance.CombatSettings.MaxHealth;
 
         DebugTextManager.Instance.SetVariable("Health", health.ToString(), this);
