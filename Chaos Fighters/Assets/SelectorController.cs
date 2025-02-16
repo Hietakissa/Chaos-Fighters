@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class SelectorController : MonoBehaviour
@@ -17,7 +18,8 @@ public class SelectorController : MonoBehaviour
     {
         if (Left)
         {
-            if (Input.GetKeyDown(KeyCode.W))
+            //if (Input.GetKeyDown(KeyCode.W))
+            if(Keyboard.current.wKey.wasPressedThisFrame)
             {
                 if (selectedNumber > 0)
                 {
@@ -28,7 +30,8 @@ public class SelectorController : MonoBehaviour
 
             }
 
-            if (Input.GetKeyDown(KeyCode.S))
+            //if (Input.GetKeyDown(KeyCode.S))
+            if (Keyboard.current.sKey.wasPressedThisFrame)
             {
                 if (selectedNumber < 2) 
                 {
@@ -41,7 +44,8 @@ public class SelectorController : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.I))
+            //if (Input.GetKeyDown(KeyCode.I))
+            if (Keyboard.current.iKey.wasPressedThisFrame)
             {
                 if (selectedNumber > 0)
                 {
@@ -52,7 +56,8 @@ public class SelectorController : MonoBehaviour
 
             }
 
-            if (Input.GetKeyDown(KeyCode.K))
+            //if (Input.GetKeyDown(KeyCode.K))
+            if (Keyboard.current.kKey.wasPressedThisFrame)
             {
                 if (selectedNumber < 2)
                 {
