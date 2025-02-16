@@ -65,6 +65,7 @@ public class SelectorController : MonoBehaviour
         {
             //if (Input.GetKeyDown(KeyCode.I))
             if (Keyboard.current.upArrowKey.wasPressedThisFrame)
+
             {
                 selectedNumber--;
                 gameObject.transform.Translate(Vector2.up * 1);
@@ -85,6 +86,7 @@ public class SelectorController : MonoBehaviour
 
             //if (Input.GetKeyDown(KeyCode.K))
             if (Keyboard.current.downArrowKey.wasPressedThisFrame)
+
             {
                 selectedNumber++;
                 gameObject.transform.Translate(Vector2.down * 1);
