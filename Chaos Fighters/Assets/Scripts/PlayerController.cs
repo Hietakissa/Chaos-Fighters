@@ -98,10 +98,10 @@ public class PlayerController : MonoBehaviour
 
         void HandleSpriteFlipping()
         {
-            //if (opponent.transform.position.x > transform.position.x) pointingDirection = Direction.Right;
-            //else if (opponent.transform.position.x < transform.position.x) pointingDirection = Direction.Left;
-            if (inputVector.x > 0) pointingDirection = Direction.Right;
-            else if (inputVector.x < 0) pointingDirection = Direction.Left;
+            if (opponent.transform.position.x > transform.position.x) pointingDirection = Direction.Right;
+            else if (opponent.transform.position.x < transform.position.x) pointingDirection = Direction.Left;
+            //if (inputVector.x > 0) pointingDirection = Direction.Right;
+            //else if (inputVector.x < 0) pointingDirection = Direction.Left;
 
             spriteRend.flipX = pointingDirection != defaultPointingDirection;
         }

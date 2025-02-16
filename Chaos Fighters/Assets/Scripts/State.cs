@@ -12,6 +12,7 @@ public abstract class State
     protected int animationIndex;
 
     protected virtual bool LoopAnimation => false;
+    protected virtual bool InvertAnimation => false;
     public virtual bool CanExit => true;
     public virtual PlayerState[] ValidExitStates => Array.Empty<PlayerState>();
     public virtual Predicate<PlayerController> EnterPredicate => (p => p != null);
@@ -33,7 +34,16 @@ public abstract class State
     }
     public virtual void UpdateState()
     {
-        animationTime += Time.deltaTime * animation.Frames.Length;
+        if (InvertAnimation)
+        {
+            animationTime -= Time.deltaTime * animation.Frames.Length;
+            if (animationTime < 0f) animationTime = animationStep * animation.Frames.Length;
+        }
+        else
+        {
+            animationTime += Time.deltaTime * animation.Frames.Length;
+        }
+
         animationIndex = (int)Mathf.Floor(animationTime / animationStep);
         if (LoopAnimation) animationIndex %= (maxAnimationIndex + 1);
     }
