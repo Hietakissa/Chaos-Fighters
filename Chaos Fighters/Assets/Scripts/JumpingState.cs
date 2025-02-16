@@ -8,7 +8,7 @@ public class JumpingState : State
     {
         return !player.IsGrounded;
     });
-    protected override bool LoopAnimation => true;
+    protected override bool LoopAnimation => false;
 
 
     public override void EnterState()

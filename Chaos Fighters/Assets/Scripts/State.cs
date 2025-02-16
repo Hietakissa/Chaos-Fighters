@@ -48,6 +48,7 @@ public abstract class State
 
         animationIndex = (int)Mathf.Floor(animationTime / animationStep);
         if (LoopAnimation) animationIndex %= (maxAnimationIndex + 1);
+        else if (animationIndex > maxAnimationIndex) animationIndex = maxAnimationIndex;
     }
     public virtual void FixedUpdateState()
     {
