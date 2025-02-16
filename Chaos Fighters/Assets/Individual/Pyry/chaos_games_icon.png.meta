@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b8c1a201e194330498e019bb74abb845
+guid: 32d25eca9d990a441a43e80c9f1dbea8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6504667930663917246
-    second: Nainen_kick_1_0
+      213: -5909721325626443764
+    second: chaos_games_icon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +49,7 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Nainen_kick_1_0
+      name: chaos_games_icon_0
       rect:
         serializedVersion: 2
-        x: 292
-        y: 25
-        width: 488
-        height: 720
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 249e6e2faf6cab5a0800000000000000
-      internalID: -6504667930663917246
+      spriteID: c083c70f3c37cfda0800000000000000
+      internalID: -5909721325626443764
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Nainen_kick_1_0: -6504667930663917246
+      chaos_games_icon_0: -5909721325626443764
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
