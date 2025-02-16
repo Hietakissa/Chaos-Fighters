@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Jumping
   m_EditorClassIdentifier: 
   frames:
-  - {fileID: 21300000, guid: bcf87cf6f1833e14d959a17175744475, type: 3}
   - {fileID: 21300000, guid: 1a7a575dcc8feba4b8f533ac1a7b35e3, type: 3}
   - {fileID: 21300000, guid: 2ed8574418734a444bf4652ca513ccc9, type: 3}
   framerate: 4

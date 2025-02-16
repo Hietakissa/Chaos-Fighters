@@ -9,11 +9,17 @@ public class JumpingState : State
         return !player.IsGrounded;
     });
     protected override bool LoopAnimation => false;
+    protected override bool ClampAnimationIndex => true;
 
 
     public override void EnterState()
     {
         base.EnterState();
+    }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
 
 
         SetAnimationFrame();

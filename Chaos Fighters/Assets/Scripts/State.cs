@@ -13,6 +13,7 @@ public abstract class State
 
     protected virtual bool LoopAnimation => false;
     protected virtual bool InvertAnimation => false;
+    protected virtual bool ClampAnimationIndex => false;
     protected virtual FrameAnimationSO OverriddenAnimation => null;
     public virtual bool CanExit => true;
     public virtual PlayerState[] ValidExitStates => Array.Empty<PlayerState>();
@@ -48,7 +49,7 @@ public abstract class State
 
         animationIndex = (int)Mathf.Floor(animationTime / animationStep);
         if (LoopAnimation) animationIndex %= (maxAnimationIndex + 1);
-        else if (animationIndex > maxAnimationIndex) animationIndex = maxAnimationIndex;
+        else if (ClampAnimationIndex && animationIndex > maxAnimationIndex) animationIndex = maxAnimationIndex;
     }
     public virtual void FixedUpdateState()
     {
