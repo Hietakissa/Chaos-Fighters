@@ -9,10 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 760730b2778543e48837cf20e98aad32, type: 3}
-  m_Name: Moving
+  m_Script: {fileID: 11500000, guid: 3b5511ca8324d66478223ca37e83bd1f, type: 3}
+  m_Name: Test
   m_EditorClassIdentifier: 
-  frames:
-  - {fileID: 21300000, guid: a5d3e3827d469194086a70090836aff1, type: 3}
-  - {fileID: 21300000, guid: 67827e932e710434e850afc3b3f332a9, type: 3}
-  framerate: 4
+  sentence: What the...
+  player1Options:
+  - option: Skibidi
+    strength: 0
+  - option: Gato
+    strength: 0
+  player2Options:
+  - option: asdf
+    strength: 3
+  - option: gfddfsg
+    strength: 1

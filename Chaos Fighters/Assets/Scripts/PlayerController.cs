@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
         movement = GameManager.Instance.MovementSettings;
         health = GameManager.Instance.CombatSettings.MaxHealth;
-        lives = 3;
+        lives = 2;
         staminaManager.Init(this);
 
         stateMachine = new StateMachineController(this);
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
 
         DebugTextManager.Instance.SetVariable("Lives", lives.ToString(), this);
 
-        if (lives <= 0)
+        if (lives < 0)
         {
             enabledInput = false;
             if (IsPlayer1) victoryText.text = "Bitch Star Wins!";
