@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5511ca8324d66478223ca37e83bd1f, type: 3}
   m_Name: Roast6
   m_EditorClassIdentifier: 
-  sentence: 
-  player1Options: []
-  player2Options: []
+  sentence: You might as well-
+  player1Options:
+  - option: L-leave and go ask for an extension on your thesis.
+    strength: 1
+  - option: Take lessons on how to be less lame.
+    strength: 2
+  - option: Give up and- and go work at a strip bar instead.
+    strength: 0
+  player2Options:
+  - option: Call the shelter and ask someone to adopt you.
+    strength: 2
+  - option: Curl up and die u know?
+    strength: 1
+  - option: Give up and go stroke some puss
+    strength: 0

@@ -12,6 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5511ca8324d66478223ca37e83bd1f, type: 3}
   m_Name: Roast9
   m_EditorClassIdentifier: 
-  sentence: 
-  player1Options: []
-  player2Options: []
+  sentence: What would your mother think if-
+  player1Options:
+  - option: If she knew what you do in your free time?
+    strength: 1
+  - option: 'If she or your friends knew how l-lame you are?
+
+'
+    strength: 2
+  - option: "If she knew you\u2019re here instead of studying?\r\n"
+    strength: 0
+  player2Options:
+  - option: "She saw you dressed like\u2026 you know? Like seriously. Ew.\r\n"
+    strength: 2
+  - option: Saw you get your ass handed to you by a girl lol.
+    strength: 0
+  - option: 'She knew you like dressing up in slutty clothes and getting beaten up.
+
+'
+    strength: 1

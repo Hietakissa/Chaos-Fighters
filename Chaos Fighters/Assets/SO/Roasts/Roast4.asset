@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5511ca8324d66478223ca37e83bd1f, type: 3}
   m_Name: Roast4
   m_EditorClassIdentifier: 
-  sentence: 
-  player1Options: []
-  player2Options: []
+  sentence: I could find someone just like you at-
+  player1Options:
+  - option: The line for S-Saphero.
+    strength: 2
+  - option: The red strict?
+    strength: 0
+  - option: A catfight.
+    strength: 1
+  player2Options:
+  - option: The pound.
+    strength: 1
+  - option: Any gym within a 50 mile radius!
+    strength: 2
+  - option: A gay club lol
+    strength: 0

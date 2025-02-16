@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5511ca8324d66478223ca37e83bd1f, type: 3}
   m_Name: Roast2
   m_EditorClassIdentifier: 
-  sentence: 
-  player1Options: []
-  player2Options: []
+  sentence: I bet someone like you-
+  player1Options:
+  - option: "Has very few r-real friends\u2026 Given your sour personality."
+    strength: 2
+  - option: "Has no future. You will end up jobless and alone\u2026 Sorry."
+    strength: 1
+  - option: Came here just to win the the money to use it on s-something selfish.
+    strength: 0
+  player2Options:
+  - option: Was bullied in highschool.
+    strength: 2
+  - option: Still thinks mullets are in style.
+    strength: 1
+  - option: Actually just enjoyed being hit by women. Ugh.
+    strength: 0

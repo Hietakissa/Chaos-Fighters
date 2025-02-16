@@ -12,6 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5511ca8324d66478223ca37e83bd1f, type: 3}
   m_Name: Roast1
   m_EditorClassIdentifier: 
-  sentence: 
-  player1Options: []
-  player2Options: []
+  sentence: "You\u2019re so-"
+  player1Options:
+  - option: "Mean\u2026 Your parents must be disappointed."
+    strength: 1
+  - option: Lame. Are- are you even old enough to wear something like that?
+    strength: 2
+  - option: "S-Scary. You\u2019re scary."
+    strength: 0
+  player2Options:
+  - option: 'Gross. Like a big dog someone bathed in the fucking sewers u know? '
+    strength: 1
+  - option: "Weird. Like sooo weird. What\u2019s with the catboy fit? "
+    strength: 0
+  - option: "Pathetic. An old man like you trying to show off when it\u2019s all
+      about mommies these days. "
+    strength: 2

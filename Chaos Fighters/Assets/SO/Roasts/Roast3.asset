@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5511ca8324d66478223ca37e83bd1f, type: 3}
   m_Name: Roast3
   m_EditorClassIdentifier: 
-  sentence: 
-  player1Options: []
-  player2Options: []
+  sentence: "You call what you\u2019ve been doing fighting?-\r"
+  player1Options:
+  - option: I thought- thought you were trying out for a schools dodgeball team.
+    strength: 0
+  - option: "I wouldn\u2019t quite call it that\u2026 "
+    strength: 1
+  - option: "It\u2019s kinda embarrassing."
+    strength: 2
+  player2Options:
+  - option: A fucking toddler would hit harder.
+    strength: 0
+  - option: "It\u2019s so pathetic. Like a drunk man stumbling down the street.\r"
+    strength: 1
+  - option: "I honestly couldn\u2019t even tell u know?\r"
+    strength: 2

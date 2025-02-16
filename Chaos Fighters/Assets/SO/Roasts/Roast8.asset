@@ -12,6 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5511ca8324d66478223ca37e83bd1f, type: 3}
   m_Name: Roast8
   m_EditorClassIdentifier: 
-  sentence: 
-  player1Options: []
-  player2Options: []
+  sentence: "I think you\u2019d be better if you-"
+  player1Options:
+  - option: Studied a little f-first.
+    strength: 1
+  - option: "Tried to be more cool\u2026\r\n"
+    strength: 2
+  - option: "Learned some new moves.\r"
+    strength: 0
+  player2Options:
+  - option: 'Like actually tried.
+
+'
+    strength: 1
+  - option: 'You gave up on the whole furry thing...
+
+'
+    strength: 0
+  - option: 'Used those muscles of you for more than showing off.
+
+'
+    strength: 2

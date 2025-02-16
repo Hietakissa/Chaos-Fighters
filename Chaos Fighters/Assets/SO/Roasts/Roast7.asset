@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5511ca8324d66478223ca37e83bd1f, type: 3}
   m_Name: Roast7
   m_EditorClassIdentifier: 
-  sentence: 
-  player1Options: []
-  player2Options: []
+  sentence: "There\u2019s something I have to say-"
+  player1Options:
+  - option: 'You are acting like a very bad girl! '
+    strength: 0
+  - option: "Jessica is so much cooler than you\u2026"
+    strength: 2
+  - option: You could still focus on your studies and become s-someone smart.
+    strength: 1
+  player2Options:
+  - option: The furry convention is as the other arena.
+    strength: 1
+  - option: "You\u2019re like in such wrong weight class."
+    strength: 2
+  - option: "You\u2019d look better on your knees.\r\n"
+    strength: 0

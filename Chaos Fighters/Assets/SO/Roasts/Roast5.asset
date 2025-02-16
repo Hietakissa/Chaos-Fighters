@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5511ca8324d66478223ca37e83bd1f, type: 3}
   m_Name: Roast5
   m_EditorClassIdentifier: 
-  sentence: 
-  player1Options: []
-  player2Options: []
+  sentence: If I had to compliment you, I would say-
+  player1Options:
+  - option: "You look\u2026 very intelegent for your age?"
+    strength: 2
+  - option: People probably feel intimidated by you.
+    strength: 0
+  - option: "Those morning starts look dangerous\u2026 do they hurt?"
+    strength: 1
+  player2Options:
+  - option: "You wouldn\u2019t look out of place in a body building competition."
+    strength: 2
+  - option: Wearing a collar looks natural on you.
+    strength: 0
+  - option: Any bitch in heat would feel sooo over shadow by you.
+    strength: 1
